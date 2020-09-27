@@ -1,11 +1,21 @@
 # Ubuntu 初始化脚本
 
-## 安装
+## 安装 方法1 
 
 ```
 curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh
-/home/ubuntu/ubuntu-init/install.sh
+cd /home/ubuntu/ubuntu-init/
+./install.sh
 ```
+
+## 安装 方法2
+
+```
+git clone git@github.com:gjenjoying/ubuntu-init.git
+cd /home/ubuntu/ubuntu-init/
+./install.sh
+```
+
 
 ### 添加本地的公钥至 deployer 用户中
 
