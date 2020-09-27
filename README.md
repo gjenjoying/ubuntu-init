@@ -18,6 +18,8 @@ curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh
 cd /home/ubuntu/ubuntu-init/
 ./install.sh
 ```
+安装好后，要看一下 /var/www 是否为 deployer:www-data，如不是，重置服务器，再安装一次！
+ls -lah /var
 
 ### 安装 方法2
 
