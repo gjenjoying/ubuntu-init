@@ -3,7 +3,8 @@
 ## 安装
 
 ```
-curl https://raw.githubusercontent.com/yyiidev/ubuntu-init/master/download.sh | bash
+curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh
+/home/ubuntu/ubuntu-init/install.sh
 ```
 
 ### 添加本地的公钥至 deployer 用户中
