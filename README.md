@@ -2,8 +2,10 @@
 
 ## 安装 方法1 
 
+ubuntu 用户登录服务器
+
 ```
-curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh
+curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh | bash
 cd /home/ubuntu/ubuntu-init/
 ./install.sh
 ```
