@@ -15,6 +15,7 @@ function init_system {
 }
 
 function init_repositories {
+    add-apt-repository universe
     add-apt-repository ppa:certbot/certbot
     apt update
 }
