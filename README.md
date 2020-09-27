@@ -56,12 +56,13 @@ chmod +x ./show_deployer_key.sh
 # Nginx
 nano /etc/nginx/nginx.conf # server_names_hash_bucket_size 64; 启用
 unlink /etc/nginx/sites-enabled/default # 通常不启用这个
+systemctl restart nginx
 
 # mariadb
 sudo mysql_secure_installation  # root 不要设密码
 
 sudo mysql
-GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'thecareer2020' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION; # 改密码
 FLUSH PRIVILEGES;
 exit;
 
