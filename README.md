@@ -1,37 +1,48 @@
 # Ubuntu 初始化脚本
 
-首先执行
+## 准备工作
 
 ```
+sudo -H -s   #  进入后是 /home/ubuntu
 add-apt-repository universe  #这2项本来在install.sh 中可自动执行 卡住了 可能是因为要输入 enter ？ 所以提前先执行好了
 add-apt-repository ppa:certbot/certbot
 ```
 
-
-## 安装 方法1 
+## 安装方法
+### 安装 方法1 （首选）
 
 ubuntu 用户登录服务器
 
 ```
-curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh | bash
+curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh | bash  # 如失败 多次几次 网络问题
 cd /home/ubuntu/ubuntu-init/
 ./install.sh
 ```
 
-## 安装 方法2
+### 安装 方法2
 
 ```
-git clone git@github.com:gjenjoying/ubuntu-init.git
+git clone git@github.com:gjenjoying/ubuntu-init.git # 需要先将用户的 ssh public key加到 github中 麻烦一些
 cd /home/ubuntu/ubuntu-init/
 ./install.sh
 ```
 
 
-### 添加本地的公钥至 deployer 用户中
+### deployer 用户配置
 
 ```
+# 添加本地的公钥至 deployer 用户中
 su - deployer
-vim ~/.ssh/authorized_keys # 复制本地公钥至 deployer 用户，用于使用 deployer 的代码部署
+nano ~/.ssh/authorized_keys # 复制本地公钥至 deployer 用户，用于使用 deployer 的代码部署 在Mac上面运行 cat ~/.ssh/id_rsa.pub | pbcopy
+
+# 测试一下是否可行，在 本地Mac上 执行 ssh deployer@ip 看看能不能连上去
+
+# 将deployer用户的 ssh key 复制到github中
+sudo -H -s
+cd /home/ubuntu/ubuntu-init
+chmod +x ./show_deployer_key.sh
+./show_deployer_key.sh
+#得到的key 复制到github中 https://github.com/settings/keys
 ```
 
 ## 注意事项
@@ -43,11 +54,14 @@ vim ~/.ssh/authorized_keys # 复制本地公钥至 deployer 用户，用于使�
 ## 软件列表
 
 * Git
-* PHP 7.4
+* PHP 7.2
 * Nginx
 * Sqlite3
+* mariadb
 * Composer
 * Redis
+* let's encrypt - certbot
+* wormhole
 
 ## 新增 Nginx 站点
 
