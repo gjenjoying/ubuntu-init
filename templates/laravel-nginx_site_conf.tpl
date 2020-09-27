@@ -1,7 +1,12 @@
+# https://laravel.com/docs/5.7/deployment 参考
 server {
     listen 80;
     server_name {{domains}};
     root "{{project_dir}}/current/public";
+    
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
 
     index index.html index.htm index.php;
 
@@ -17,27 +22,16 @@ server {
     access_log /var/log/nginx/{{project}}.log;
     error_log /var/log/nginx/{{project}}-error.log error;
 
-    sendfile off;
-
-    client_max_body_size 100m;
+    error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
         fastcgi_index index.php;
-        include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        fastcgi_param DOCUMENT_ROOT $realpath_root;
-
-        fastcgi_intercept_errors off;
-        fastcgi_buffer_size 32k;
-        fastcgi_buffers 8 16k;
-        fastcgi_connect_timeout 300;
-        fastcgi_send_timeout 300;
-        fastcgi_read_timeout 300;
+        include fastcgi_params;
     }
 
-    location ~ /\.ht {
+    location ~ /\.(?!well-known).* {
         deny all;
     }
 }
