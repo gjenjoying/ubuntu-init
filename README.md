@@ -51,6 +51,34 @@ chmod +x ./show_deployer_key.sh
 * 请在 root 下执行脚本
 * nginx mariadb redis 要配置下，分别见：https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-18-04， https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04， https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
 
+具体要做的如下
+```
+# Nginx
+# server_names_hash_bucket_size 64; 启用
+sudo nano /etc/nginx/nginx.conf
+
+# mariadb
+# root 不要设密码
+sudo mysql_secure_installation 
+
+sudo mysql
+GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'thecareer2020' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit;
+
+sudo systemctl status mariadb
+sudo mysqladmin version
+mysqladmin -u peter -p version
+
+# redis
+# supervised systemd   +  # bind 127.0.0.1 ::1
+sudo nano /etc/redis/redis.conf
+sudo systemctl restart redis
+sudo netstat -lnp | grep redis
+
+```
+
+
 ## 软件列表
 
 * Git
