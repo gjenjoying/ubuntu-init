@@ -54,12 +54,11 @@ chmod +x ./show_deployer_key.sh
 具体要做的如下
 ```
 # Nginx
-# server_names_hash_bucket_size 64; 启用
-sudo nano /etc/nginx/nginx.conf
+nano /etc/nginx/nginx.conf # server_names_hash_bucket_size 64; 启用
+unlink /etc/nginx/sites-enabled/default # 通常不启用这个
 
 # mariadb
-# root 不要设密码
-sudo mysql_secure_installation 
+sudo mysql_secure_installation  # root 不要设密码
 
 sudo mysql
 GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'thecareer2020' WITH GRANT OPTION;
@@ -71,8 +70,7 @@ sudo mysqladmin version
 mysqladmin -u peter -p version
 
 # redis
-# supervised systemd   +  # bind 127.0.0.1 ::1
-sudo nano /etc/redis/redis.conf
+sudo nano /etc/redis/redis.conf # supervised systemd   +  # bind 127.0.0.1 ::1
 sudo systemctl restart redis
 sudo netstat -lnp | grep redis
 
