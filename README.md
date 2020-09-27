@@ -1,5 +1,13 @@
 # Ubuntu 初始化脚本
 
+首先执行
+
+```
+add-apt-repository universe  #这2项本来在install.sh 中可自动执行 卡住了 可能是因为要输入 enter ？ 所以提前先执行好了
+add-apt-repository ppa:certbot/certbot
+```
+
+
 ## 安装 方法1 
 
 ubuntu 用户登录服务器
@@ -30,6 +38,7 @@ vim ~/.ssh/authorized_keys # 复制本地公钥至 deployer 用户，用于使�
 
 * 适用于 ubuntu 18
 * 请在 root 下执行脚本
+* nginx mariadb redis 要配置下，分别见：https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-18-04， https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04， https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
 
 ## 软件列表
 
