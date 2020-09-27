@@ -56,7 +56,8 @@ function install_others {
 }
 
 function install_wormhole {
-    snap install wormhole
+    # snap install wormhole # 这个会导致 wormhole receive 经常出现 permission denied
+    sudo apt install magic-wormhole
 }
 
 call_function init_system "正在初始化系统" ${LOG_PATH}
