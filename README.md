@@ -60,7 +60,7 @@ nano /etc/nginx/nginx.conf # server_names_hash_bucket_size 64; 启用
 unlink /etc/nginx/sites-enabled/default # 通常不启用这个
 systemctl restart nginx
 
-# mariadb
+# mysql https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
 sudo mysql_secure_installation  # root 不要设密码
 
 sudo mysql
@@ -68,8 +68,8 @@ GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTI
 FLUSH PRIVILEGES;
 exit;
 
-sudo systemctl status mariadb
-sudo mysqladmin version
+sudo systemctl status mysql.service
+sudo mysqladmin -p -u root version
 mysqladmin -u peter -p version
 
 # redis
