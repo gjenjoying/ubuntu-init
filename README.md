@@ -61,8 +61,7 @@ unlink /etc/nginx/sites-enabled/default # 通常不启用这个
 systemctl restart nginx
 
 # mysql https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
-sudo mysql_secure_installation  # root 不要设密码
-
+sudo mysql_secure_installation  # root 需要设置密码  但不用改为pw 验证方式，创建一个新用户来执行高级权限 如下
 sudo mysql
 GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION; # 改密码
 FLUSH PRIVILEGES;
