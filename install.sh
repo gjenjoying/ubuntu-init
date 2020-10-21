@@ -50,7 +50,7 @@ function install_composer {
 }
 
 function install_others {
-    apt install -y nginx python-certbot-nginx redis-server sqlite3 mariadb-server
+    apt install -y nginx python-certbot-nginx redis-server sqlite3 mysql-server
     chown -R ${WWW_USER}.${WWW_USER_GROUP} /var/www/
     systemctl enable nginx.service
 }
@@ -64,9 +64,9 @@ call_function init_system "正在初始化系统" ${LOG_PATH}
 call_function init_repositories "正在初始化系统软件库" ${LOG_PATH}
 call_function install_basic_softwares "正在安装基本的软件" ${LOG_PATH}
 call_function install_php "正在安装 PHP" ${LOG_PATH}
-call_function install_others "正在安装 Nginx Redis Sqlite3 mariadb-server" ${LOG_PATH}
+call_function install_others "正在安装 Nginx Redis Sqlite3 mysql-server" ${LOG_PATH}
 call_function install_composer "正在安装 Composer" ${LOG_PATH}
 call_function init_deployer_user "正在初始化 deployer 用户" ${LOG_PATH}
 call_function install_wormhole "正在安装 Wormhole" ${LOG_PATH}
 
-echo "安装完毕! 请注意 nginx, redis, mariadb需要做配置"
+echo "安装完毕! 请注意 nginx, redis, mysql-server需要做配置"
