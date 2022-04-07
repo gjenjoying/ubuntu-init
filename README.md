@@ -11,11 +11,13 @@ add-apt-repository ppa:certbot/certbot
 ## 安装方法
 ### 安装 方法1 （首选）
 
-ubuntu 用户登录服务器
 
 ```
+# ubuntu 用户登录服务器
 curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh | bash  # 如失败 多次几次 网络问题
 cd /home/ubuntu/ubuntu-init/
+# 切换成root用户
+sudo -H -s
 ./install.sh
 ```
 安装好后，要看一下 /var/www 是否为 deployer:www-data，如不是，重置服务器，再安装一次！
