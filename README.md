@@ -58,12 +58,12 @@ chmod +x ./show_deployer_key.sh
 具体要做的如下
 ```
 # Nginx
-nano /etc/nginx/nginx.conf # server_names_hash_bucket_size 64; 启用
+nano /etc/nginx/nginx.conf # server_names_hash_bucket_size 64; 启用；保存退出
 unlink /etc/nginx/sites-enabled/default # 通常不启用这个
 systemctl restart nginx
 
 # mysql https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
-sudo mysql_secure_installation  # root 需要设置密码  但不用改为pw 验证方式，创建一个新用户来执行高级权限 如下
+sudo mysql_secure_installation  # root 需要设置密码（如自己用的最高级密码），其它全部选择 y 即可，注意root不要开romtely访问。不用改为pw 验证方式，创建一个新用户来执行高级权限 如下
 sudo mysql
 GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION; # 改密码
 FLUSH PRIVILEGES;
