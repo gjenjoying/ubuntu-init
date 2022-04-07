@@ -74,7 +74,7 @@ sudo mysqladmin -p -u root version
 mysqladmin -u peter -p version
 
 # redis
-sudo nano /etc/redis/redis.conf # supervised systemd   +  # bind 127.0.0.1 ::1
+sudo nano /etc/redis/redis.conf  #1. 将 supervised no 改为 supervised systemd  #2. 把 bind 127.0.0.1 ::1 关闭（注释掉，#） 
 sudo systemctl restart redis
 sudo netstat -lnp | grep redis
 
