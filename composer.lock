@@ -1,0 +1,52 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c81c8c84016efc27161272ac8911bdbe",
+    "packages": [
+        {
+            "name": "interconnectit/search-replace-db",
+            "version": "4.1.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.tencent.com/repository/composer/interconnectit/search-replace-db/4.1.2/interconnectit-search-replace-db-4.1.2.zip",
+                "reference": "046459947052fa5b955a9c18910aba1f50ef3590",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-mysqli": "*",
+                "ext-pdo": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "srdb.class.php"
+                ]
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "description": "A PHP search replace tool for quickly modifying a string throughout a database. Useful for changing the base URL when migrating a WordPress site from development to production.",
+            "homepage": "https://github.com/interconnectit/Search-Replace-DB",
+            "time": "2020-05-12T08:39:39+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

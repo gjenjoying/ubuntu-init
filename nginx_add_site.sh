@@ -113,7 +113,7 @@ if [ "$project_type" = "wp" ]; then
     echo "成功！创建数据库：${dbName} 成功，授予${dbWordpressUser}用户完整权限，已导入初始数据 ${wordpressSql}"
 
     # 替换导入数据库中的url，导入的数据库中是 wp15.xixisys.com  需要提前在服务器上安装好 /root/Search-Replace-DB
-    cd /root/Search-Replace-DB && php srdb.cli.php -h localhost -n ${dbName} -u ${dbWordpressUser} -p "${dbWordpressPassword}" -s "wp15.xixisys.com" -r "${project}"
+    cd /root/ubuntu-init/vendor/interconnectit/search-replace-db && php srdb.cli.php -h localhost -n ${dbName} -u ${dbWordpressUser} -p "${dbWordpressPassword}" -s "wp15.xixisys.com" -r "${project}"
     echo "成功！使用 Search-Replace-DB 将导入的数据sql 中的url 替换。不用理会显示的预警文字，功能正常的。预警文字：results: Incomplete or ill-typed serialization data:: This is usually caused by a plugin storing classes as a
             serialised string which other PHP classes can't then access..."
 

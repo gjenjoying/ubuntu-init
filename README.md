@@ -3,8 +3,7 @@
 ## 准备工作
 1. 此脚本必须保存在 /root/ubuntu-init 目录下运行！否则 wp 相关的脚本会出错！
 2. 须 创建 .env （用env_example改为 .env，写入对应的值）
-3. 需要提前在服务器上安装好 /root/Search-Replace-DB https://github.com/interconnectit/Search-Replace-DB
-由于Search-Replace-DB 需要php7.4及出，但此脚本中的laravel/dzq是使用php7.2的，因此，未将Search-Replace-DB集成到此脚本中。
+3. 服务器需要同时安装php 7.4版本，才能composer install 安装search-replace-db，执行wp建站。
 ```
 sudo su   
 cd ~ #  进入后是 /root
