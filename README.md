@@ -1,27 +1,16 @@
 # Ubuntu 初始化脚本
 
 ## 准备工作
-1. 此脚本必须保存在 /root/ubuntu-init 目录下运行！否则 wp 相关的脚本会出错！
-2. 须 创建 .env （用env_example改为 .env，写入对应的值）
-3. 服务器需要同时安装php 7.4版本，才能composer install 安装search-replace-db，执行wp建站。
-```
-sudo su   
-cd ~ #  进入后是 /root
-add-apt-repository universe  #这2项本来在install.sh 中可自动执行 卡住了 可能是因为要输入 enter ？ 所以提前先执行好了
-add-apt-repository ppa:certbot/certbot
-add-apt-repository ppa:ondrej/php # 同时安装php7.4 需要，选择
-```
+建wp站的话，要看下面wordpress相关的说明！
 
 ## 安装方法
 ### 安装 方法1 （首选）
-
-
 ```
 # root 用户登录服务器
+sudo su
+cd ~ # 一定要使用 /root目录
 curl https://raw.githubusercontent.com/gjenjoying/ubuntu-init/master/download.sh | bash  # 如失败 多次几次 网络问题
 cd /root/ubuntu-init/
-# 切换成root用户
-# sudo su
 ./install.sh
 ```
 安装好后，要看一下 /var/www 是否为 deployer:www-data，如不是，重置服务器，再安装一次！
@@ -118,6 +107,11 @@ sudo netstat -lnp | grep redis
 a. 可选择初始版（仅完成了安装步骤）或最新版本（xixisys提供的默认设置）
 b. 将 wp-config.php 从 wordpress 内 移出到 与wordpress同级，这样无法通过 网址访问到（因为nginx的root设到了wordpress），增加安全
 c. 当前权限开得较多，整个项目设置成了 www-data:www-data，后续可以降低一些（但要保证可以安装插件）。
+
+### 初始工作
+1. 此脚本必须保存在 /root/ubuntu-init 目录下运行！否则 wp 相关的脚本会出错！
+2. 须 创建 .env （用env_example改为 .env，写入对应的值）
+3. composer install 安装 Search-Replace-DB
 ### templates 里的 wp-config.php
 注意！wp-config-example 中涉及到的 AUTH_KEY 等值，与 wordpress.5.9.3-xixisys.sql、wordpress.5.9.3-xixisys-initial.sql 中存的一致
 后续如果要换 wordpress.5.9.3-xixisys.sql 这些sql，一定要从 wordpress.5.9.3-xixisys-initial.sql 重新配置一份，再改动，再保存到新的 wordpress.5.9.3-xixisys.sql
