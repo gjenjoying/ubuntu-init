@@ -114,6 +114,10 @@ sudo netstat -lnp | grep redis
 复制 SSH 公钥至你的代码库用于代码部署
 
 ## wordpress 相关
+通过此脚本创建的wordpress，实现了以下功能：
+a. 可选择初始版（仅完成了安装步骤）或最新版本（xixisys提供的默认设置）
+b. 将 wp-config.php 从 wordpress 内 移出到 与wordpress同级，这样无法通过 网址访问到（因为nginx的root设到了wordpress），增加安全
+c. 当前权限开得较多，整个项目设置成了 www-data:www-data，后续可以降低一些（但要保证可以安装插件）。
 ### templates 里的 wp-config.php
 注意！wp-config-example 中涉及到的 AUTH_KEY 等值，与 wordpress.5.9.3-xixisys.sql、wordpress.5.9.3-xixisys-initial.sql 中存的一致
 后续如果要换 wordpress.5.9.3-xixisys.sql 这些sql，一定要从 wordpress.5.9.3-xixisys-initial.sql 重新配置一份，再改动，再保存到新的 wordpress.5.9.3-xixisys.sql
