@@ -42,8 +42,8 @@ function install_basic_softwares {
 }
 
 function install_php {
-    apt install -y php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif} # 验证方法 sudo systemctl status php7.2-fpm， 
-    apt install -y php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif} # 验证方法 sudo systemctl status php7.4-fpm
+    apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif} # 验证方法 sudo systemctl status php7.2-fpm， 
+    apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif} # 验证方法 sudo systemctl status php7.4-fpm
 }
 
 function install_composer {
