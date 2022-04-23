@@ -9,6 +9,7 @@ sudo su
 cd ~ #  进入后是 /root
 add-apt-repository universe  #这2项本来在install.sh 中可自动执行 卡住了 可能是因为要输入 enter ？ 所以提前先执行好了
 add-apt-repository ppa:certbot/certbot
+add-apt-repository ppa:ondrej/php # 同时安装php7.4 需要，选择
 ```
 
 ## 安装方法

@@ -12,13 +12,13 @@ check_root
 function init_system {
     apt update
     apt install -y software-properties-common
-    add-apt-repository ppa:ondrej/php # 同时安装php7.4 需要
     apt update
 }
 
 function init_repositories {
-    # add-apt-repository universe  #这2项自动执行 卡住了 可能是因为要输入 enter ？ 所以提前先执行好了
-    # add-apt-repository ppa:certbot/certbot 
+    add-apt-repository universe -y 
+    add-apt-repository ppa:certbot/certbot -y
+    add-apt-repository ppa:ondrej/php -y # 同时安装php7.4 需要
     apt update
 }
 
