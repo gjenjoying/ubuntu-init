@@ -12,6 +12,8 @@ check_root
 function init_system {
     apt update
     apt install -y software-properties-common
+    add-apt-repository ppa:ondrej/php # 同时安装php7.4 需要
+    apt update
 }
 
 function init_repositories {
@@ -41,6 +43,7 @@ function install_basic_softwares {
 
 function install_php {
     apt install -y php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif}
+    apt install -y php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif}
 }
 
 function install_composer {

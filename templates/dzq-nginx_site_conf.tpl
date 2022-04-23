@@ -1,3 +1,4 @@
+# 注意是php7.2-fpm。
 server {
     listen 80;
     server_name {{domains}};

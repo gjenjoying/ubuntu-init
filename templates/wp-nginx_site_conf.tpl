@@ -1,4 +1,4 @@
-# https://laravel.com/docs/5.7/deployment 参考
+# https://laravel.com/docs/5.7/deployment 参考。注意是php7.4-fpm。
 server {
     listen 80;
     server_name {{domains}};
