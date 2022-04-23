@@ -91,10 +91,13 @@ if [ "$project_type" = "wp" ]; then
     sed "s|{{dbWordpressUser}}|${dbWordpressUser}|g" |
     sed "s|{{dbWordpressPassword}}|${dbWordpressPassword}|g" > ${project_dir}/wp-config.php
 
-    # 权限开小了，安装不了插件。但目前开的权限太大，后续应该调小一些。
-    # 同时给 wordpress 及 wp-config.php加权限 
-    # chown -R ${DEPLOYER_USER}.${WWW_USER_GROUP} ${project_dir}
-    chown -R ${WWW_USER_GROUP}.${WWW_USER_GROUP} ${project_dir}
+    # 权限开小了，安装不了插件。尝试过，用户得设为www-data:www-data，否则很容易出错。其实所有文件均为755，wp-includes 也为755.
+    # 见：https://www.wpdaxue.com/wordpress-file-read-and-write-permission.html 。这里提到的644（无 x），试过都不行。
+    chown -R ${WWW_USER_GROUP}.${WWW_USER_GROUP} ${project_dir}/wordpress
+    # wp-config.php owner改为 deployer，权限设为 444 (read only)
+    chown ${DEPLOYER_USER}.${WWW_USER_GROUP} ${project_dir}/wp-config.php
+    chmod -wx ${project_dir}/wp-config.php
+
     # 固定使用本地存的此版本 以配合后面 初始化数据库 wordpress.5.9.3-xixisys.sql的导入
     echo "成功！copy ${wordpressFiles} 文件复制完成。权限已改为：www-data:www-data"
 
