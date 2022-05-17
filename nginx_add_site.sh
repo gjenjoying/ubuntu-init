@@ -76,14 +76,16 @@ if [ "$project_type" = "wp" ]; then
     # cp /root/ubuntu-init/wordpress/wordpress-5.9.3-zh_CN.tar.gz ${project_dir}
     # cd ${project_dir} && tar zxvf ./wordpress-5.9.3-zh_CN.tar.gz
     # rm ${project_dir}/wordpress-5.9.3-zh_CN.tar.gz
-    
+
     # 直接把安装后的文件+db一起导入
     cp /root/ubuntu-init/wordpress/${wordpressFiles} ${project_dir}/wordpress -r
 
-    # 把输入的项目名 中的 . 替换为 _，定为db name，如www.example.com 转为 wp_www_example_com
-    dbName=wp_${project//./_}
+    # 把输入的项目名 中的 . 和 - 替换为 _，定为db name，如www.example.com 转为 wp_www_example_com
+    project=${project//-/.} # 先把 - 换成 .
+    dbName=wp_${project//./_} # 再把 . 换成 _
+    
 
-    # 生成 wp-config.php  文件 
+    # 生成 wp-config.php  文件
     # 注意！wp-config-example 中涉及到的 AUTH_KEY 等值，与 wordpress.5.9.3-xixisys.sql、wordpress.5.9.3-xixisys-initial.sql 中存的一致
     # 后续如果要换 wordpress.5.9.3-xixisys.sql 这些sql，一定要从 wordpress.5.9.3-xixisys-initial.sql 重新配置一份，再改动，再保存到新的 wordpress.5.9.3-xixisys.sql
     cat ${CURRENT_DIR}/templates/wp-config-template.php |
