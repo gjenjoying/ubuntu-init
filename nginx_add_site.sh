@@ -81,8 +81,8 @@ if [ "$project_type" = "wp" ]; then
     cp /root/ubuntu-init/wordpress/${wordpressFiles} ${project_dir}/wordpress -r
 
     # 把输入的项目名 中的 . 和 - 替换为 _，定为db name，如www.example.com 转为 wp_www_example_com
-    project=${project//-/.} # 先把 - 换成 .
-    dbName=wp_${project//./_} # 再把 . 换成 _
+    project_temp=${project//-/.} # 先把 - 换成 .
+    dbName=wp_${project_temp//./_} # 再把 . 换成 _
     
 
     # 生成 wp-config.php  文件
