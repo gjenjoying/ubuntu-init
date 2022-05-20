@@ -1,0 +1,1028 @@
+# Translation of Plugins - Schema &#8211; All In One Schema Rich Snippets - Stable (latest release) in Chinese (China)
+# This file is distributed under the same license as the Plugins - Schema &#8211; All In One Schema Rich Snippets - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2020-02-17 10:55:45+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: zh_CN\n"
+"Project-Id-Version: Plugins - Schema &#8211; All In One Schema Rich Snippets - Stable (latest release)\n"
+
+#: settings.php:93
+msgid "Title"
+msgstr "标题"
+
+#: settings.php:94 settings.php:107
+msgid "Description"
+msgstr "描述"
+
+#: settings.php:38
+msgid "Website"
+msgstr "网站"
+
+#: settings.php:67
+msgid "Total Time"
+msgstr "总时间"
+
+#: settings.php:81
+msgid "Software Name"
+msgstr "软件名称"
+
+#: meta-boxes.php:593
+msgid "Short Description"
+msgstr "简短描述"
+
+#. #-#-#-#-#  tmp-all-in-one-schemaorg-rich-snippets.pot (All In One Schema.org
+#. Rich Snippets 1.2.0)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  tmp-all-in-one-schemaorg-rich-snippets.pot (All In One Schema.org
+#. Rich Snippets 1.2.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.brainstormforce.com"
+msgstr "http://www.brainstormforce.com"
+
+#: settings.php:66
+msgid "Cook Time"
+msgstr "烹饪时间"
+
+#: settings.php:39
+msgid "Company"
+msgstr "公司"
+
+#: meta-boxes.php:586 settings.php:106
+msgid "Author"
+msgstr "作者"
+
+#. Plugin Name of the plugin/theme
+msgid "All In One Schema.org Rich Snippets"
+msgstr "All In One Schema.org Rich Snippets"
+
+#: meta-boxes.php:600
+msgid "Article Image"
+msgstr "文章图像"
+
+#: meta-boxes.php:579 settings.php:105
+msgid "Article Name"
+msgstr "文章名称"
+
+#: settings.php:37
+msgid "Job Title"
+msgstr "职位名称"
+
+#: settings.php:63
+msgid "Recipe Name"
+msgstr "食谱名称"
+
+#: meta-boxes.php:572
+msgid "Rich Snippets - Article"
+msgstr "Rich Snippets - 文章"
+
+#: meta-boxes.php:601
+msgid "Upload or select image from gallery. Medium size is recommended (300px X 300px)"
+msgstr "上传或从图库中选择图片。建议使用中等尺寸（300像素X 300像素）"
+
+#. Description of the plugin/theme
+msgid "The All in One Rich Snippets gives the power to the blog author to control the rich snippets to be shown in the search results by the search engines."
+msgstr "All in One Rich Snippets使博客作者可以控制要由搜索引擎显示在搜索结果中的丰富网页摘要。"
+
+#: settings.php:6 settings.php:19 settings.php:34 settings.php:48
+#: settings.php:62 settings.php:78 settings.php:92 settings.php:104
+msgid "Summary"
+msgstr "摘要"
+
+#: settings.php:23
+msgid "Starting on"
+msgstr "起价"
+
+#: settings.php:108
+msgid "Image"
+msgstr "图像"
+
+#: settings.php:95
+msgid "Duration"
+msgstr "持续时间"
+
+#: settings.php:70
+msgid "Average Rating"
+msgstr "平均评分"
+
+#. Author of the plugin/theme
+msgid "Brainstorm Force"
+msgstr "Brainstorm Force"
+
+#: settings.php:65
+msgid "Preparation Time"
+msgstr "准备时间"
+
+#: meta-boxes.php:587
+msgid "Enter the author name for this article"
+msgstr "输入本篇文章的作者姓名"
+
+#: meta-boxes.php:580
+msgid "Enter the name for this article"
+msgstr "输入本篇文章的名称"
+
+#: meta-boxes.php:565
+msgid "Provide the date when the video is uploaded"
+msgstr "提供视频上传的日期"
+
+#: settings.php:24
+msgid "Ending on"
+msgstr "截止于"
+
+#: settings.php:7
+msgid "Reviewer"
+msgstr "评论者"
+
+#: settings.php:8
+msgid "Review Date"
+msgstr "评论日期"
+
+#: settings.php:9
+msgid "Reviewed Item"
+msgstr "评论的项目"
+
+#: settings.php:11 settings.php:49 settings.php:79
+msgid "Author Rating"
+msgstr "作者评分"
+
+#: meta-boxes.php:594
+msgid "Enter the brief description about this article (About 30 Words)"
+msgstr "输入有关本文的简短描述（约30个字）"
+
+#: settings.php:64
+msgid "Published On"
+msgstr "发布于"
+
+#: settings.php:21
+msgid "Location"
+msgstr "位置"
+
+#: settings.php:35
+msgid "Name"
+msgstr "名称"
+
+#: settings.php:52
+msgid "Aggregate Rating"
+msgstr "综合评分"
+
+#: settings.php:54
+msgid "Product Availability"
+msgstr "产品可用性"
+
+#: admin/index.php:182 meta-boxes.php:29
+msgid "Product"
+msgstr "产品"
+
+#: admin/index.php:134
+msgid "Person"
+msgstr "个人"
+
+#: init.php:531
+msgid "Please Try Again"
+msgstr "请重试"
+
+#: init.php:545
+msgid "Remove Embed"
+msgstr "移除嵌入"
+
+#: init.php:550
+msgid "No oEmbed Results Found for %s. View more info at"
+msgstr "没找到符合 %s 的嵌入内容. 在此查看更多信息"
+
+#: admin/index.php:348
+msgid "Video Upload Date :"
+msgstr "视频上传日期："
+
+#: admin/index.php:336
+msgid "Video Title :"
+msgstr "视频标题："
+
+#: meta-boxes.php:529
+msgid "Video Title"
+msgstr "视频标题"
+
+#: meta-boxes.php:543
+msgid "Video Thumbnail"
+msgstr "视频缩略图"
+
+#: admin/index.php:344
+msgid "Video Duration :"
+msgstr "视频时长："
+
+#: meta-boxes.php:557
+msgid "Video Duration"
+msgstr "视频时长"
+
+#: meta-boxes.php:536
+msgid "Video Description"
+msgstr "视频描述"
+
+#: admin/index.php:324 meta-boxes.php:32 meta-boxes.php:550
+msgid "Video"
+msgstr "视频"
+
+#: admin/index.php:415
+msgid "Usage Instructions"
+msgstr "使用说明"
+
+#: meta-boxes.php:551
+msgid "Upload Video or enter the video file url"
+msgstr "上传视频或输入视频文件网址"
+
+#: meta-boxes.php:352
+msgid "Upload the product image or select from library. Medium size is recommended (300px X 300px)"
+msgstr "上传产品图片或从库中选择。建议使用中等尺寸（300像素X 300像素）"
+
+#: meta-boxes.php:274
+msgid "Upload the photo or select from media library. Medium size is recommended (300px X 300px)"
+msgstr "上传照片或从媒体库中选择。建议使用中等尺寸（300像素X 300像素）"
+
+#: meta-boxes.php:544
+msgid "Upload or select video thumbnail from gallery. Medium size is recommended (300px X 300px)"
+msgstr "上传或从图库中选择视频缩略图。建议使用中等尺寸（300像素X 300像素）"
+
+#: meta-boxes.php:188
+msgid "Website URL "
+msgstr "网站网址"
+
+#: admin/index.php:258
+msgid "Total Time :"
+msgstr "总时间 ："
+
+#: meta-boxes.php:423
+msgid "Total Time  (Format: 1H30M. H - Hours, M - Minutes )"
+msgstr "总时间（格式：1H30M。H-小时，M-分钟）"
+
+#: admin/index.php:488
+msgid "Title Color"
+msgstr "标题颜色"
+
+#: admin/index.php:480
+msgid "Title Background"
+msgstr "标题背景"
+
+#: meta-boxes.php:564 settings.php:96
+msgid "Upload Date"
+msgstr "上传日期"
+
+#: admin/index.php:456
+msgid "Unfortunately, not at the moment. Though this is definitely in our roadmap and the development will complete soon. Stay tuned!"
+msgstr "不幸的是，目前还没有。尽管这绝对是我们的路线图，并且开发将很快完成。敬请关注！"
+
+#: admin/index.php:635
+msgid "Success! Your changes were successfully saved!"
+msgstr "成功！您的更改已成功保存！"
+
+#: admin/index.php:294
+msgid "Software Price :"
+msgstr "软件价格："
+
+#: meta-boxes.php:486
+msgid "Software Name "
+msgstr "软件名称"
+
+#: meta-boxes.php:500
+msgid "Software Image"
+msgstr "软件图像"
+
+#: admin/index.php:278 meta-boxes.php:31
+msgid "Software Application"
+msgstr "软件应用"
+
+#: admin/index.php:298
+msgid "Software Name:"
+msgstr "软件名称："
+
+#: admin/index.php:84 admin/index.php:124 admin/index.php:172
+#: admin/index.php:220 admin/index.php:268 admin/index.php:312
+#: admin/index.php:354 admin/index.php:394 admin/index.php:497
+msgid "Reset "
+msgstr "重置"
+
+#: meta-boxes.php:365
+msgid "Product Price"
+msgstr "产品价格"
+
+#: admin/index.php:202
+msgid "Product Name :"
+msgstr "产品名称："
+
+#: meta-boxes.php:344 settings.php:51
+msgid "Product Name"
+msgstr "产品名称"
+
+#: admin/index.php:206
+msgid "Product Category :"
+msgstr "产品分类："
+
+#: admin/index.php:210
+msgid "Price :"
+msgstr "价格："
+
+#: meta-boxes.php:472 settings.php:53 settings.php:80
+msgid "Price"
+msgstr "价格"
+
+#: meta-boxes.php:287
+msgid "Homepage URL"
+msgstr "主页URL"
+
+#: admin/index.php:158
+msgid "Homepage :"
+msgstr "主页："
+
+#: meta-boxes.php:530
+msgid "Enter the title for this video"
+msgstr "输入此视频的标题"
+
+#: meta-boxes.php:416
+msgid "Cook Time. (Format: 1H30M. H - Hours, M - Minutes )"
+msgstr "烹饪时间。(格式：1h30m。h-小时，M-分钟)"
+
+#: admin/index.php:254
+msgid "Cook Time :"
+msgstr "烹饪时间:"
+
+#: admin/index.php:40
+msgid "Configuration"
+msgstr "配置"
+
+#: admin/index.php:162
+msgid "Company Name :"
+msgstr "公司名称："
+
+#: meta-boxes.php:294
+msgid "Company / Organization"
+msgstr "公司/组织"
+
+#: admin/index.php:380
+msgid "Author :"
+msgstr "作者："
+
+#: admin/index.php:364 meta-boxes.php:33
+msgid "Article"
+msgstr "文章"
+
+#: admin/index.php:376
+msgid "Article Name :"
+msgstr "文章名称："
+
+#: meta-boxes.php:493 settings.php:82
+msgid "Operating System"
+msgstr "操作系统"
+
+#: admin/index.php:302
+msgid "Operating System :"
+msgstr "操作系统 ："
+
+#: meta-boxes.php:266 settings.php:36
+msgid "Nickname"
+msgstr "昵称"
+
+#: admin/index.php:150
+msgid "Nickname :"
+msgstr "昵称："
+
+#: meta-boxes.php:479
+msgid "Currency"
+msgstr "货币"
+
+#: meta-boxes.php:280
+msgid "Job Title "
+msgstr "职位名称"
+
+#: admin/index.php:435
+msgid "Here: <a href='http://www.google.com/webmasters/tools/richsnippets'>http://www.google.com/webmasters/tools/richsnippets</a>"
+msgstr "此处：<a href='http://www.google.com/webmasters/tools/richsnippets'>http://www.google.com/webmasters/tools/richsnippets</a>"
+
+#: admin/index.php:388
+msgid "Image :"
+msgstr "图像："
+
+#: admin/index.php:84 admin/index.php:124 admin/index.php:172
+#: admin/index.php:220 admin/index.php:268 admin/index.php:312
+#: admin/index.php:354 admin/index.php:394
+msgid "Update "
+msgstr "更新"
+
+#: admin/index.php:733
+msgid "Your Name:"
+msgstr "您的姓名:"
+
+#: admin/index.php:735
+msgid "Your Email:"
+msgstr "您的电子邮件："
+
+#: admin/index.php:739
+msgid "Subject:"
+msgstr "主题："
+
+#: meta-boxes.php:372
+msgid "Currency "
+msgstr "货币"
+
+#: meta-boxes.php:429
+msgid "Recipe Photo"
+msgstr "食谱照片"
+
+#: admin/index.php:242
+msgid "Recipe Name :"
+msgstr "食谱名称："
+
+#: meta-boxes.php:401
+msgid "Recipe Name "
+msgstr "食谱名称"
+
+#: admin/index.php:230 meta-boxes.php:30
+msgid "Recipe"
+msgstr "食谱"
+
+#: meta-boxes.php:351
+msgid "Product Image"
+msgstr "产品图像"
+
+#: admin/index.php:728
+msgid "Get in touch with the Plugin Developers"
+msgstr "与插件开发人员联系"
+
+#: meta-boxes.php:487
+msgid "Enter the Software Name."
+msgstr "输入软件名称。"
+
+#: admin/index.php:492
+msgid "Snippet Text Color"
+msgstr "摘要文字颜色"
+
+#: meta-boxes.php:522
+msgid "Rich Snippets - Videos"
+msgstr "Rich Snippets  - 视频"
+
+#: meta-boxes.php:451
+msgid "Rich Snippets - Software Application"
+msgstr "Rich Snippets  - 软件应用"
+
+#: meta-boxes.php:394
+msgid "Rich Snippets - Recipes"
+msgstr "Rich Snippets  - 食谱"
+
+#: meta-boxes.php:316
+msgid "Rich Snippets - Products"
+msgstr "Rich Snippets - 产品"
+
+#: meta-boxes.php:174
+msgid "Rich Snippets - Organization"
+msgstr "Rich Snippets - 组织"
+
+#: meta-boxes.php:166
+msgid "Rich Snippets - Music"
+msgstr "Rich Snippets - 音乐"
+
+#: admin/index.php:42
+msgid " How to Use?"
+msgstr "如何使用？"
+
+#: admin/index.php:431
+msgid "<span>Plugins FAQs</span>"
+msgstr "<span>插件常见问题</span>"
+
+#: admin/index.php:37
+msgid "All in One Schema.org Rich Snippets - Dashboard"
+msgstr "All in One Schema.org Rich Snippets - 仪表盘"
+
+#: admin/index.php:43
+msgid "FAQs"
+msgstr "常见问题"
+
+#: meta-boxes.php:366
+msgid "Enter the product Price."
+msgstr "输入产品价格。"
+
+#: meta-boxes.php:59 meta-boxes.php:323
+msgid "Your Rating"
+msgstr "你的评分"
+
+#: meta-boxes.php:430
+msgid "Upload or Select recipe photo. Medium size is recommended (300px X 300px)"
+msgstr "上传或选择食谱照片。建议使用中等尺寸（300像素X 300像素）"
+
+#: meta-boxes.php:501
+msgid "Upload or select image of software. Medium size is recommended (300px X 300px)"
+msgstr "上传或选择软件图像。建议使用中等尺寸（300像素X 300像素）"
+
+#: meta-boxes.php:159
+msgid "Upload or Select from media gallery. Medium size is recommended (300px X 300px)"
+msgstr "上传或从媒体库选择。建议使用中等尺寸（300像素X 300像素）"
+
+#: admin/index.php:443
+msgid "Well, the plugin works perfectly with most of the other plugins as the only thing \"All in One Schema.org Rich Snippets\" does is - it give you power to add Rich Snippets MicroData in your pages and posts easily. <br><br>If you find any it conflicting with any other plugin, please do not hesitate to report an issue."
+msgstr "好吧，该插件可以与大多数其他插件完美配合，因为“ All in One Schema.org Rich Snippets”唯一要做的就是-它使您能够轻松地在页面和文章中添加丰富网页摘要微数据。 <br><br>如果您发现它与任何其他插件有冲突，请随时报告问题。"
+
+#: admin/index.php:439
+msgid "We understand you don't like the content that gets displayed on your page / post. However as per the strong recommendation of Google, the MicroData should be clearly visible to the user."
+msgstr "我们了解您不喜欢页面/文章上显示的内容。但是，根据Google的强烈建议，微数据应该对用户清晰可见。"
+
+#: meta-boxes.php:408
+msgid "Time Required "
+msgstr "所需时间"
+
+#: meta-boxes.php:103
+msgid "Street Address"
+msgstr "街道地址"
+
+#: admin/index.php:114
+msgid "Start Time :"
+msgstr "开始时间:"
+
+#: meta-boxes.php:130
+msgid "Start Date "
+msgstr "开始日期"
+
+#: admin/index.php:639
+msgid "Sorry, Your changes are not saved!"
+msgstr "抱歉，您的更改未保存！"
+
+#: meta-boxes.php:458
+msgid "Software Rating"
+msgstr "软件等级"
+
+#: meta-boxes.php:217
+msgid "Region."
+msgstr "地区."
+
+#: meta-boxes.php:117 meta-boxes.php:309
+msgid "Region"
+msgstr "地区"
+
+#: meta-boxes.php:459
+msgid "Rate this software."
+msgstr "评价此软件。"
+
+#: meta-boxes.php:324
+msgid "Rate this product or aggregate rating."
+msgstr "为该产品评分或总评分。"
+
+#: meta-boxes.php:409
+msgid "Preperation time  (Format: 1H30M. H - Hours, M - Minutes )"
+msgstr "准备时间（格式：1H30M。H-小时，M-分钟）"
+
+#: meta-boxes.php:224
+msgid "Postal Code"
+msgstr "邮政编码"
+
+#: admin/index.php:146
+msgid "Person's Name :"
+msgstr "人名："
+
+#: meta-boxes.php:181
+msgid "Organization Name "
+msgstr "组织名称"
+
+#: admin/index.php:455
+msgid "Is Google Authorship part of your plugin as well?"
+msgstr "Google Authorship也是插件的一部分吗？"
+
+#: meta-boxes.php:494
+msgid "Enter the software Operating System."
+msgstr "输入软件适用操作系统。"
+
+#: meta-boxes.php:402
+msgid "Enter the recipe name."
+msgstr "输入食谱名称。"
+
+#: meta-boxes.php:203
+msgid "Street Name."
+msgstr "街道名称."
+
+#: meta-boxes.php:338
+msgid "Enter the products brand name"
+msgstr "输入产品品牌名称"
+
+#: meta-boxes.php:345
+msgid "Enter the product name."
+msgstr "输入产品名称。"
+
+#: meta-boxes.php:473
+msgid "Enter the Price of Software"
+msgstr "输入软件价格"
+
+#: admin/index.php:118
+msgid "End Time :"
+msgstr "结束时间："
+
+#: meta-boxes.php:137
+msgid "End Date "
+msgstr "结束日期"
+
+#: admin/index.php:340 admin/index.php:384
+msgid "Description :"
+msgstr "描述："
+
+#: admin/index.php:41
+msgid "Customization"
+msgstr "自定义"
+
+#: admin/index.php:198
+msgid "Brand Name :"
+msgstr "品牌名称："
+
+#: meta-boxes.php:231
+msgid "Country Name"
+msgstr "国家地区名称"
+
+#: meta-boxes.php:337 settings.php:50
+msgid "Brand Name"
+msgstr "品牌名称"
+
+#: admin/index.php:484
+msgid "Border Color"
+msgstr "边框颜色"
+
+#: admin/index.php:262
+msgid "Average Rating:"
+msgstr "平均评分："
+
+#: admin/index.php:194 admin/index.php:290
+msgid "Author Rating :"
+msgstr "作者评分："
+
+#: admin/index.php:166
+msgid "Address :"
+msgstr "地址："
+
+#: meta-boxes.php:202
+msgid "Address "
+msgstr "地址"
+
+#: meta-boxes.php:301 settings.php:40
+msgid "Address"
+msgstr "地址"
+
+#: admin/index.php:434
+msgid "Where I can see preview of my search results?"
+msgstr "在哪里可以看到搜索结果的预览？"
+
+#: admin/index.php:438
+msgid "Why does the plugin create extra content at the end of my page / post? Can I simply hide / customise it? It's messing my design! "
+msgstr "为什么该插件在页面/文章的末尾创建额外的内容？我可以简单地隐藏/自定义它吗？搞砸了我的设计！"
+
+#: meta-boxes.php:385
+msgid "__ Please Select __"
+msgstr "__请选择__"
+
+#: admin/index.php:450
+msgid "[Get in touch] with us to ask if this feature is in our development roadmap. If it is not in our roadmap, and if you still think this feature would make the plugin to better, we have a couple of options for you -"
+msgstr ""
+"[与我们联系]询问此功能是否在我们的开发路线图中。\n"
+"如果它不在我们的路线图中，并且您仍然认为此功能可以使插件更好，我们可以为您提供两个选择："
+
+#: admin/index.php:750
+msgid "Your Query in Brief:"
+msgstr "您的查询简述："
+
+#: admin/index.php:66
+msgid "Reviewer :"
+msgstr "评论者"
+
+#: admin/index.php:70
+msgid "Review Date :"
+msgstr "评论日期："
+
+#: admin/index.php:62 admin/index.php:102 admin/index.php:142
+#: admin/index.php:190 admin/index.php:238 admin/index.php:286
+#: admin/index.php:332 admin/index.php:372
+msgid "Rich Snippet Title :"
+msgstr "Rich Snippet 标题："
+
+#: admin/index.php:106
+msgid "Event Title :"
+msgstr "活动标题："
+
+#: admin/index.php:110
+msgid "Event Location :"
+msgstr "活动地点:"
+
+#: admin/index.php:94
+msgid "Events"
+msgstr "活动"
+
+#: meta-boxes.php:558
+msgid "Enter the duration for this video"
+msgstr "输入此视频的时长"
+
+#: meta-boxes.php:537
+msgid "Enter the brief description for this video"
+msgstr "输入此视频的简要说明"
+
+#: meta-boxes.php:508
+msgid "Enter the landing page url for software"
+msgstr "输入软件的目标网页网址"
+
+#: meta-boxes.php:281
+msgid "Enter job title."
+msgstr "输入职位名称。"
+
+#: meta-boxes.php:252
+msgid "Rich Snippets - People"
+msgstr "Rich Snippets - 人员"
+
+#: meta-boxes.php:89
+msgid "What would be the name of the event?"
+msgstr "活动的名称是什么？"
+
+#: meta-boxes.php:88
+msgid "Event Title "
+msgstr "活动标题"
+
+#: meta-boxes.php:25 settings.php:20
+msgid "Event"
+msgstr "活动"
+
+#: meta-boxes.php:23
+msgid "Select what this post is about"
+msgstr "选择该文章的内容"
+
+#: meta-boxes.php:10
+msgid "Configure Rich Snippet"
+msgstr "配置 Rich Snippet"
+
+#: admin/index.php:737
+msgid "Reference URL:"
+msgstr "参考网址："
+
+#: admin/index.php:731
+msgid "Just fill out the form below and your message will be emailed to the Plugin Developers."
+msgstr "只要填写下面的表格，您的消息就会通过电子邮件发送给插件开发者。"
+
+#: admin/index.php:471
+msgid "<span>Customize the look and feel of rich snippet box</span>"
+msgstr "<span>自定义 rich snippet 框的外观</span>"
+
+#: admin/index.php:452
+msgid "Code the new feature if you are a developer and submit your code. If we include this feature in our releases, credits will be given to you."
+msgstr "如果您是开发人员，请编写新特性的代码并提交您的代码。如果我们在我们的发行版中包含这个特性，就会给你积分。"
+
+#: admin/index.php:449
+msgid " I don't see the feature I want. How can I get it?"
+msgstr "我没有看到我想要的功能。 我怎么才能得到它？"
+
+#: admin/index.php:447
+msgid "Meanwhile - you can validate and see preview of your rich snippets on <a href='http://www.google.com/webmasters/tools/richsnippets'>[Google Structured Data Testing Tool here]</a> ."
+msgstr "同时-您可以在 <a href='http://www.google.com/webmasters/tools/richsnippets'>[Google Structured Data Testing Tool here]</a> 上验证并查看丰富网页摘要的预览。"
+
+#: admin/index.php:446
+msgid "If rich snippets are not appearing in your search results yet, most probably they will start appearing soon as Google / other search engines finds your website more authoritative."
+msgstr "如果丰富网页摘要尚未出现在您的搜索结果中，则很可能它们会在Google /其他搜索引擎发现您的网站更具权威性后立即开始出现。"
+
+#: admin/index.php:445
+msgid "Most probably rich snippets are displayed in for you search results as soon as search engines crawl the MicroData the plugin has created. However it's totally upto search engines to display rich snippets for your search result (which mostly depends on your website authority)"
+msgstr "搜索引擎对插件创建的微数据进行爬网后，很可能会在您搜索结果中显示丰富的网页摘要。 但是，完全由搜索引擎来为您的搜索结果显示丰富的网页摘要（这主要取决于您的网站权限）"
+
+#: admin/index.php:444
+msgid "How much time does it take to show up rich snippets for my search results? My search results are still not coming up with rich snippets."
+msgstr "在搜索结果中显示丰富的网页摘要需要多少时间？ 我的搜索结果仍然没有提供丰富的网页摘要。"
+
+#: admin/index.php:442
+msgid " How does this plugin work with other plugins like WordPress SEO, wooCommerce, etc?"
+msgstr "此插件如何与WordPress SEO，wooCommerce等其他插件一起使用？"
+
+#: admin/index.php:440
+msgid "Here is a reference link of what Google says. <a href='https://sites.google.com/site/webmasterhelpforum/en/faq-rich-snippets#display'> https://sites.google.com/site/webmasterhelpforum/en/faq-rich-snippets#display</a>"
+msgstr "以下是谷歌的参考链接。<a href='https://sites.google.com/site/webmasterhelpforum/en/faq-rich-snippets#display'> https://sites.google.com/site/webmasterhelpforum/en/faq-rich-snippets#display</a>"
+
+#: admin/index.php:437
+msgid "No. Though some fields are mandatory and required to by Google in order to display rich snippet."
+msgstr "否。尽管某些字段是Google必填字段，并且必须显示一些丰富的网页摘要。"
+
+#: admin/index.php:436
+msgid "Do I have to fill in all the details?"
+msgstr "我需要填写所有详细信息吗？"
+
+#: admin/index.php:367
+msgid "Strings to be displayed on frontend for <strong>Article Rich Snippets &mdash;</strong>"
+msgstr "<strong>文章 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:327
+msgid "Strings to be displayed on frontend for <strong>Video Rich Snippets &mdash;</strong>"
+msgstr "<strong>视频 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:97
+msgid "Strings to be displayed on frontend for <strong>Events Rich Snippets &mdash;</strong>"
+msgstr "<strong>活动 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:57
+msgid "Strings to be displayed on frontend for <strong>Item Review Rich Snippets &mdash;</strong>"
+msgstr "<strong>Item Review Rich Snippets - </strong>要在前端显示的字符串"
+
+#: admin/index.php:281
+msgid "Strings to be displayed on frontend for <strong>Software Application Rich Snippets &mdash;</strong>"
+msgstr "<strong>软件应用 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:233
+msgid "Strings to be displayed on frontend for <strong>Recipe Rich Snippets &mdash;</strong>"
+msgstr "<strong>食谱 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:185
+msgid "Strings to be displayed on frontend for <strong>Product Rich Snippets &mdash;</strong>"
+msgstr "<strong>产品 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: admin/index.php:137
+msgid "Strings to be displayed on frontend for <strong>Person's Rich Snippets &mdash;</strong>"
+msgstr "<strong>人员 Rich Snippets &mdash;</strong>要在前端显示的字符串"
+
+#: meta-boxes.php:386
+msgid "Out of Stock"
+msgstr "缺货"
+
+#: meta-boxes.php:373 meta-boxes.php:480
+msgid "Enter the Currency Code(e.g USD, INR, AUD, EUR, GBP). <a href=\"http://www.science.co.il/International/Currency-Codes.asp\" target=\"_blank\"> Know you currency code</a>"
+msgstr "输入货币代码（例如，USD，INR，AUD，EUR，GBP）。 <a href=\"http://www.science.co.il/International/Currency-Codes.asp\" target=\"_blank\"> 了解你的货币代码</a>"
+
+#: meta-boxes.php:302
+msgid "Enter Locality"
+msgstr "输入地区"
+
+#: meta-boxes.php:189
+msgid "Enter the Organization homepage url."
+msgstr "输入组织的主页的网址。"
+
+#: meta-boxes.php:182
+msgid "Enter the Company or Organization Name."
+msgstr "输入公司或组织名称。"
+
+#: meta-boxes.php:158
+msgid "Event Photo "
+msgstr "活动照片"
+
+#: meta-boxes.php:152
+msgid "Enter Longitude"
+msgstr "输入经度"
+
+#: meta-boxes.php:145
+msgid "Enter Latitude. <a href=\"http://universimmedia.pagesperso-orange.fr/geo/loc.htm\" target=\"_blank\">Find Here.</a>"
+msgstr "输入纬度。 <a href=\"http://universimmedia.pagesperso-orange.fr/geo/loc.htm\" target=\"_blank\">在此处查找。</a>"
+
+#: meta-boxes.php:144
+msgid "GEO Location "
+msgstr "地理位置"
+
+#: meta-boxes.php:138
+msgid "Provide the Event End Date."
+msgstr "提供活动结束日期。"
+
+#: meta-boxes.php:131
+msgid "Provide the Event Start Date."
+msgstr "提供活动开始日期。"
+
+#: meta-boxes.php:60
+msgid "&nbsp;&nbsp;Rate this item (1-5)"
+msgstr "&nbsp;&nbsp;评价这个项目 (1-5)"
+
+#: meta-boxes.php:53
+msgid "Enter the name of the item, you are writing review about."
+msgstr "输入您正在撰写评论的项目名称。"
+
+#: meta-boxes.php:52
+msgid "Item to be reviewed"
+msgstr "项目已被评论"
+
+#: meta-boxes.php:46
+msgid "Enter the name of Item Reviewer or The Post Author."
+msgstr "输入项目评论者或文章作者的名称。"
+
+#: meta-boxes.php:45
+msgid "Reviewer&rsquo;s Name "
+msgstr "评论者姓名"
+
+#: meta-boxes.php:39 meta-boxes.php:82 meta-boxes.php:167 meta-boxes.php:175
+#: meta-boxes.php:253 meta-boxes.php:317 meta-boxes.php:395 meta-boxes.php:452
+#: meta-boxes.php:523 meta-boxes.php:573
+msgid "Please provide the following information."
+msgstr "请提供以下信息。"
+
+#: meta-boxes.php:38
+msgid "Rich Snippets - Item Review"
+msgstr "Rich Snippets - 项目评论"
+
+#: meta-boxes.php:28
+msgid "People"
+msgstr "人员"
+
+#: admin/index.php:476
+msgid "Box Background "
+msgstr "框背景"
+
+#: admin/index.php:250
+msgid "Preparation Time:"
+msgstr "准备时间:"
+
+#: admin/index.php:246
+msgid "Published On : "
+msgstr "发布于："
+
+#: admin/index.php:78
+msgid "Item Ratings :"
+msgstr "项目评级:"
+
+#: admin/index.php:74
+msgid "Item Name :"
+msgstr "项目名:"
+
+#: admin/index.php:54 meta-boxes.php:24
+msgid "Item Review"
+msgstr "项目评论"
+
+#: meta-boxes.php:387
+msgid "In Stock"
+msgstr "有货"
+
+#: meta-boxes.php:288
+msgid "Enter homepage URL(if any)."
+msgstr "输入首页网址（如果有）。"
+
+#: meta-boxes.php:267
+msgid "Enter the nickname (if any)."
+msgstr "输入昵称（如果有）。"
+
+#: meta-boxes.php:260
+msgid "Enter the relative person&lsquo;s name."
+msgstr "输入相关人员的姓名。"
+
+#: meta-boxes.php:196
+msgid "Enter the Telephone No."
+msgstr "输入电话号码。"
+
+#: meta-boxes.php:238
+msgid "Latitude. <a href=\"http://universimmedia.pagesperso-orange.fr/geo/loc.htm\" target=\"_blank\">Find Here.</a>"
+msgstr "纬度。 <a href=\"http://universimmedia.pagesperso-orange.fr/geo/loc.htm\" target=\"_blank\">在此处查找。</a>"
+
+#: meta-boxes.php:245
+msgid "Longitude."
+msgstr "经度。"
+
+#: meta-boxes.php:237
+msgid "GEO Location"
+msgstr "地理位置"
+
+#: meta-boxes.php:259
+msgid "Person&lsquo;s Name"
+msgstr "人名"
+
+#: meta-boxes.php:95
+msgid "Location "
+msgstr "位置"
+
+#: meta-boxes.php:96
+msgid "Organization Name Here"
+msgstr "此处组织名称"
+
+#: meta-boxes.php:388
+msgid "In Store Only"
+msgstr "仅在商店"
+
+#: meta-boxes.php:273
+msgid "Photograph"
+msgstr "照片"
+
+#: meta-boxes.php:379
+msgid "Availability"
+msgstr "可用性"
+
+#: meta-boxes.php:195
+msgid "Contact No. "
+msgstr "联系方式"
+
+#: meta-boxes.php:380
+msgid "Select the products availability."
+msgstr "选择产品的可用性。"
+
+#: meta-boxes.php:81
+msgid "Rich Snippets - Events"
+msgstr "Rich Snippets - 活动"
+
+#: admin/index.php:214
+msgid "Product Availability :"
+msgstr "产品可用性"
+
+#: meta-boxes.php:389
+msgid "Pre-Order"
+msgstr "预购"
+
+#: admin/index.php:154
+msgid "Job Title :"
+msgstr "职位名称 ："
+
+#: admin/index.php:441
+msgid "If you don't like the default design the content box created by plugin, you can always <a href='?page=rich_snippet_dashboard#tab-4'> customise it </a> or edit CSS located <a target='_blank' title='Click here to edit the css' href='plugin-editor.php?file=all-in-one-schemaorg-rich-snippets/css/style.css&plugin=all-in-one-schemaorg-rich-snippets/index.php'> here </a>or request professional service at $25"
+msgstr "如果您不喜欢插件创建的默认设计内容框，则始终可以 <a href='?page=rich_snippet_dashboard#tab-4'> 自定义</a>或编辑位于 <a target='_blank' title='点击此处编辑 CSS' href='plugin-editor.php?file=all-in-one-schemaorg-rich-snippets/css/style.css&plugin=all-in-one-schemaorg-rich-snippets/index.php'> 此处</a>或要求$25的专业服务"
+
+#: meta-boxes.php:507 settings.php:83
+msgid "Landing Page"
+msgstr "着陆页"
+
+#: admin/index.php:306
+msgid "Landing Page:"
+msgstr "着陆页："
