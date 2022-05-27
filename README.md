@@ -111,7 +111,7 @@ c. 当前权限开得较多，整个项目设置成了 www-data:www-data，后�
 ### 初始工作
 1. 此脚本必须保存在 /root/ubuntu-init 目录下运行！否则 wp 相关的脚本会出错！
 2. 须 创建 .env （用env_example改为 .env，写入对应的值）
-3. composer install 安装 Search-Replace-DB
+3. composer install 安装 Search-Replace-DB （项目中执行 composer require interconnectit/search-replace-db）
 ### templates 里的 wp-config.php
 注意！wp-config-example 中涉及到的 AUTH_KEY 等值，与 wordpress.5.9.3-xixisys.sql、wordpress.5.9.3-xixisys-initial.sql 中存的一致
 后续如果要换 wordpress.5.9.3-xixisys.sql 这些sql，一定要从 wordpress.5.9.3-xixisys-initial.sql 重新配置一份，再改动，再保存到新的 wordpress.5.9.3-xixisys.sql
