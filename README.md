@@ -71,6 +71,9 @@ sudo nano /etc/redis/redis.conf  #1. 将 supervised no 改为 supervised systemd
 sudo systemctl restart redis
 sudo netstat -lnp | grep redis
 
+# memcached
+# 默认配置基本不用动了，只要确认 /etc/memcached.conf 存在 -l 127.0.0.1
+# 具体见：https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-memcached-on-ubuntu-18-04
 ```
 
 

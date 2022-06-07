@@ -45,9 +45,9 @@ function install_php {
     # php 7.2, 7.3, 7.4 都装吧！老的代码都用得到！sudo update-alternatives --config php 来切换版本  
     # # 验证方法 sudo systemctl status php7.2-fpm， 7.2也得装 发现没装7.2，直接用7.4的话，en.k-reach.com, en.xixisys.com报502错误！
     # 7.3 需要的话 也可装！reachkeeper需要7.3
-    apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
-    apt install -y php7.3 php7.3-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
-    apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,sqlite3,imagick,tidy,xmlrpc,mongodb,intl}
+    apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
+    apt install -y php7.3 php7.3-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
+    apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,imagick,tidy,xmlrpc,mongodb,intl}
 }
 
 function install_composer {
@@ -57,7 +57,7 @@ function install_composer {
 }
 
 function install_others {
-    apt install -y nginx python-certbot-nginx redis-server sqlite3 mysql-server
+    apt install -y nginx python-certbot-nginx redis-server memcached libmemcached-tools sqlite3 mysql-server
     chown -R ${WWW_USER}.${WWW_USER_GROUP} /var/www/
     systemctl enable nginx.service
 }
@@ -71,9 +71,9 @@ call_function init_system "正在初始化系统" ${LOG_PATH}
 call_function init_repositories "正在初始化系统软件库" ${LOG_PATH}
 call_function install_basic_softwares "正在安装基本的软件" ${LOG_PATH}
 call_function install_php "正在安装 PHP" ${LOG_PATH}
-call_function install_others "正在安装 Nginx Redis Sqlite3 mysql-server" ${LOG_PATH}
+call_function install_others "正在安装 Nginx Redis Memcached Sqlite3 mysql-server" ${LOG_PATH}
 call_function install_composer "正在安装 Composer" ${LOG_PATH}
 call_function init_deployer_user "正在初始化 deployer 用户" ${LOG_PATH}
 call_function install_wormhole "正在安装 Wormhole" ${LOG_PATH}
 
-echo "安装完毕! 请注意 nginx, redis, mysql-server需要做配置"
+echo "安装完毕! 请注意 nginx, redis, Memcached, mysql-server需要做配置"
