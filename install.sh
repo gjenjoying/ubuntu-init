@@ -47,7 +47,7 @@ function install_php {
     # 7.3 需要的话 也可装！reachkeeper需要7.3
     apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
     apt install -y php7.3 php7.3-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
-    apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,memcache,sqlite3,imagick,tidy,xmlrpc,mongodb,intl}
+    apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,memcache,ssh2,sqlite3,imagick,tidy,xmlrpc,mongodb,intl}
 }
 
 function install_composer {
