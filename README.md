@@ -16,10 +16,20 @@ cd /root/ubuntu-init/
 安装好后，要看一下 /var/www 是否为 deployer:www-data，如不是，重置服务器，再安装一次！
 ls -lah /var
 
-### 安装 方法2
+### 安装 方法2 （由于ubuntu-init也需要使用git，所以可以使用这个）
 
 ```
-git clone git@github.com:gjenjoying/ubuntu-init.git # 需要先将用户的 ssh public key加到 github中 麻烦一些
+# 生成密钥
+sudo su
+# 看 ~/.ssh 下面是否有 id_rsa 了
+cd ~/.ssh 
+# 没的话 生成；全部默认回车
+ssh-keygen -t rsa -C "rl-xixisys-int-tencent-us@en.xixisys.com"
+cat id_rsa.pub
+# 将上面的key copy到 github.com, https://github.com/settings/ssh/new
+
+# clone
+git clone git@github.com:gjenjoying/ubuntu-init.git 
 cd /root/ubuntu-init/
 ./install.sh
 ```
