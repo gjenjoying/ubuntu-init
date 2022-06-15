@@ -21,6 +21,6 @@ kill -9 $A
 done 
 done 
 
-ps -A | grep agent check
+ps -A | grep agent
 echo "ps -A | grep agent check 执行后，如无任何显示，则删光了；如有，看看是否是自己的 "
 echo "root 用户下，执行 crontab -e，删除腾讯相关的"
