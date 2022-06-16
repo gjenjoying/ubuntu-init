@@ -3,8 +3,6 @@
 # cronjob执行时 可以 cd path && cronjobs/xxx.sh 来执行
 export $(xargs <.env)
 
-timedatectl # 显示当前服务器时区
-CurrentTime=`date -R`
 echo "tencent-us 服务器更新快照！(脚本在 其它服务器（如tencent-cn） root用户下crontab中运行)"
 
 # 需要先安装 tccli https://cloud.tencent.com/document/product/440/34011
@@ -23,7 +21,11 @@ if [ "$leftSnapshotState" == "NORMAL" ];then
 	else
 		echo "！！！出错！！！保留的Snapshot有问题！请到腾讯后台查看！"
 fi
-echo "Today is $CurrentTime （注：此为运营此脚本的服务器时间，而非执行快照/脚本更新的服务器时间）"
+
+timedatectl # 显示运行脚本的服务器的时间 时区
+echo "实际执行了 更新快照、镜像操作的服务器（${tencentRegionUS}）的时间如下："
+TZ=${tencentRegionUSTZ} date -R # 显示实际执行了 更新快照、镜像操作的服务器的时间
+
 echo "There're $SnapshotTotalCount snapshots. The Oldest SnapshotId is: $OldestSnapshotId"
 
 tccli lighthouse DeleteSnapshots --cli-unfold-argument --region ${tencentRegionUS} --SnapshotIds $OldestSnapshotId

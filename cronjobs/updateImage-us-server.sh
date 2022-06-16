@@ -3,7 +3,6 @@
 # cronjob执行时 可以 cd path && cronjobs/xxx.sh 来执行
 export $(xargs <.env)
 
-timedatectl # 显示当前服务器时区
 CurrentTime=`date -R`
 echo "tencent-us 服务器更新镜像！(脚本在 其它服务器（如tencent-cn） root用户下crontab中运行)"
 
@@ -32,7 +31,11 @@ tccli lighthouse DescribeBlueprints --cli-unfold-argument --region ${tencentRegi
 ImageTotalCountValid=$(jq .TotalCount image.json)
 
 echo "!!!$ImageTotalCountValid VALID images!!!Total: $ImageTotalCount images! 如果不是5个，等个5天看看，如果没变成5个，进腾讯后台检查！"
-echo "Today is $CurrentTime （注：此为运营此脚本的服务器时间，而非执行快照/脚本更新的服务器时间）"
+
+timedatectl # 显示运行脚本的服务器的时间 时区
+echo "实际执行了 更新快照、镜像操作的服务器（${tencentRegionUS}）的时间如下："
+TZ=${tencentRegionUSTZ} date -R # 显示实际执行了 更新快照、镜像操作的服务器的时间
+
 echo "The Oldest ImageId is: $OldestImageId"
 echo "Image Id $OldestImageId has been deleted"
 echo "New Image Id $NewImageId is created"
