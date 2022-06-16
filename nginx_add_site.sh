@@ -1,5 +1,5 @@
 #!/bin/bash
-# 把.env 导入到环境变量中
+# 把.env 导入到环境变量中 需要在项目文件根目录中运行脚本才能读取到此 .env
 export $(xargs <.env)
 
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
