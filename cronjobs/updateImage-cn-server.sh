@@ -36,6 +36,8 @@ echo "执行脚本的服务器时间如下："
 date -R
 echo "实际执行了 更新快照、镜像操作的服务器（${tencentRegionCN}）的时间如下："
 TZ=${tencentRegionCNTZ} date -R # 显示实际执行了 更新快照、镜像操作的服务器的时间
+echo "此时英国时间如下："
+TZ=Europe/London date -R
 
 echo "The Oldest ImageId is: $OldestImageId"
 echo "Image Id $OldestImageId has been deleted"
