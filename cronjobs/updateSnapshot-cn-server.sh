@@ -22,7 +22,8 @@ if [ "$leftSnapshotState" == "NORMAL" ];then
 		echo "！！！出错！！！保留的Snapshot有问题！请到腾讯后台查看！"
 fi
 
-timedatectl # 显示运行脚本的服务器的时间 时区
+echo "执行脚本的服务器时间如下："
+date -R
 echo "实际执行了 更新快照、镜像操作的服务器（${tencentRegionCN}）的时间如下："
 TZ=${tencentRegionCNTZ} date -R # 显示实际执行了 更新快照、镜像操作的服务器的时间
 

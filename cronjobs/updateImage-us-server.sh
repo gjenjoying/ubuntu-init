@@ -32,7 +32,8 @@ ImageTotalCountValid=$(jq .TotalCount image.json)
 
 echo "!!!$ImageTotalCountValid VALID images!!!Total: $ImageTotalCount images! 如果不是5个，等个5天看看，如果没变成5个，进腾讯后台检查！"
 
-timedatectl # 显示运行脚本的服务器的时间 时区
+echo "执行脚本的服务器时间如下："
+date -R
 echo "实际执行了 更新快照、镜像操作的服务器（${tencentRegionUS}）的时间如下："
 TZ=${tencentRegionUSTZ} date -R # 显示实际执行了 更新快照、镜像操作的服务器的时间
 
