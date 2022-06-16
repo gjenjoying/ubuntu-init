@@ -122,6 +122,7 @@ API调试使用 API Explorer: https://console.cloud.tencent.com/api/explorer?Pro
 - cronjobs里面的 updateImage-cn.sh，updateSnap-cn.sh,updateImage-us.sh，updateSnap-us.sh
 
 ## 其他
+- check_time_zone.sh，仅用于ubuntu系统，不支持mac （可用mac上的multipass下的ubuntu），用于计算各时区时间
 
 * 脚本参考：[laravel-ubuntu-init](https://github.com/summerblue/laravel-ubuntu-init)
 * 推荐阅读：[又一篇 Deployer 的使用攻略](https://overtrue.me/articles/2018/06/deployer-guide.html)
