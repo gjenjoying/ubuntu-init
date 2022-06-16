@@ -115,44 +115,11 @@ sudo netstat -lnp | grep redis
 
 复制 SSH 公钥至你的代码库用于代码部署
 
-## wordpress 相关
-通过此脚本创建的wordpress，实现了以下功能：
-a. 可选择初始版（仅完成了安装步骤）或最新版本（xixisys提供的默认设置）
-b. 将 wp-config.php 从 wordpress 内 移出到 与wordpress同级，这样无法通过 网址访问到（因为nginx的root设到了wordpress），增加安全
-c. 当前权限开得较多，整个项目设置成了 www-data:www-data，后续可以降低一些（但要保证可以安装插件）。
-
-### 初始工作
-1. 此脚本必须保存在 /root/ubuntu-init 目录下运行！否则 wp 相关的脚本会出错！
-2. 须 创建 .env （用env_example改为 .env，写入对应的值）
-3. composer install 安装 Search-Replace-DB （项目中执行 composer require interconnectit/search-replace-db）
-### templates 里的 wp-config.php
-注意！wp-config-example 中涉及到的 AUTH_KEY 等值，与 wordpress.5.9.3-xixisys.sql、wordpress.5.9.3-xixisys-initial.sql 中存的一致
-后续如果要换 wordpress.5.9.3-xixisys.sql 这些sql，一定要从 wordpress.5.9.3-xixisys-initial.sql 重新配置一份，再改动，再保存到新的 wordpress.5.9.3-xixisys.sql
-这样可以避免改动 .env 中的值。
-### 创建 .env
-将 env_example 重命名为 .env，写上实际的值。
-注意！wp-config-example 中涉及到的 AUTH_KEY 等值，如写在 .env 会导致报错，因为一些特殊字符不能 export到环境里，加上单引号或双引号也不行！
-
-### php 7.4及以上
-如果要用此脚本装wp，需要初始时安装php7.4，如已安装7.2，可以新服务器重新装一次，或者，升级php7.2到7.4：
-https://www.digitalocean.com/community/questions/how-to-upgrade-php-7-2-to-php-7-4-on-ubuntu-18-04-nginx
-
-### 默认用户名及密码
-用户名:xixisys，密码:demo
-目前使用的是5.9.3版，中文的，下载地址：
-https://cn.wordpress.org/download/#download-install
-
-### 默认项目文件及数据库sql
-在服务器上安装后，得到文件夹和对应数据库，导出为wordpress.5.9.3-xixisys 和 wordpress.5.9.3-xixisys.sql
-
-在项目中，有默认的 wordpress.5.9.3-xixisys 文件夹（包含了初始配置的wp-config.php），也包含了wordpress.5.9.3-xixisys.sql(包含了初始配置的数据库)
-
-注：
-1. wordpress.5.9.3-xixisys 文件夹 直接copy初始化完成后的网站的项目文件夹即可（整个wordpress）。
-2. 导出wordpress.5.9.3-xixisys.sql时，使用 mysqldump 加参数：--no-create-db，例如
-`mysqldump -u peter -p --databases wp_wordpress_xixisys_com --no-create-db > wp_wordpress_xixisys_com.sql`
-注意：得到sql，要手动删除 USE {DBNAME} 这一行，这样后续才能导入！
-3. wordpress 文件夹内，-initial的，是刚刚装好后，只设置了用户名和密码的。而未加-initial的，是设置得比较好的了。保留 -initial 的，是为了方便回到最初未定制的样子。
+## 腾讯服务器相关脚本
+需要先安装 tccli: sudo pip install tccli，tccli --version， tccli configure，见：https://cloud.tencent.com/document/product/440/34011 
+API调试使用 API Explorer: https://console.cloud.tencent.com/api/explorer?Product=lighthouse&Version=2020-03-24&Action=DescribeSnapshots&SignVersion=
+- remove_tencent_services
+- cronjobs里面的 updateImage-cn.sh，updateSnap-cn.sh,updateImage-us.sh，updateSnap-us.sh
 
 ## 其他
 
