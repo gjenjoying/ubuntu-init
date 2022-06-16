@@ -38,7 +38,7 @@ function init_deployer_user {
 }
 
 function install_basic_softwares {
-    apt install -y curl git build-essential unzip supervisor
+    apt install -y curl git build-essential unzip supervisor jq
 }
 
 function install_php {
