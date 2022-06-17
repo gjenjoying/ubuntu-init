@@ -56,6 +56,7 @@ chmod +x ./show_deployer_key.sh
 
 * 适用于 ubuntu 18
 * 请在 root 下执行脚本
+* 切换php版本：sudo update-alternatives --config php
 * nginx mariadb redis 要配置下，分别见：https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04, https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04， https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
 
 具体要做的如下
