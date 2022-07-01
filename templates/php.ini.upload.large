@@ -840,7 +840,7 @@ file_uploads = On
 ; specified).
 ; http://php.net/upload-tmp-dir
 ;upload_tmp_dir =
-
+upload_tmp_dir = /var/www/xixisys-wordpress/tmp
 ; Maximum allowed size for uploaded files.
 ; http://php.net/upload-max-filesize
 upload_max_filesize = 256M
