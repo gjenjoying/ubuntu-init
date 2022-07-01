@@ -67,6 +67,15 @@ function install_wormhole {
     sudo apt -y install magic-wormhole
 }
 
+function change_php74fpm_config {
+    # 改动下php.ini配置
+    mv /etc/php/7.4/fpm/php.ini /etc/php/7.4/fpm/php.ini.bak
+    cp ${CURRENT_DIR}/templates/php.ini.original /etc/php/7.4/fpm/php.ini.original
+    cp ${CURRENT_DIR}/templates/php.ini.upload.large /etc/php/7.4/fpm/php.ini.upload.large
+    ln -s /etc/php/7.4/fpm/php.ini.original /etc/php/7.4/fpm/php.ini
+    service php7.4-fpm restart
+}   
+
 call_function init_system "正在初始化系统" ${LOG_PATH}
 call_function init_repositories "正在初始化系统软件库" ${LOG_PATH}
 call_function install_basic_softwares "正在安装基本的软件" ${LOG_PATH}
@@ -75,5 +84,6 @@ call_function install_others "正在安装 Nginx Redis Memcached Sqlite3 mysql-s
 call_function install_composer "正在安装 Composer" ${LOG_PATH}
 call_function init_deployer_user "正在初始化 deployer 用户" ${LOG_PATH}
 call_function install_wormhole "正在安装 Wormhole" ${LOG_PATH}
+call_function change_php74fpm_config "/etc/php/7.4/fpm/php.ini 下配置做了调整" ${LOG_PATH}
 
 echo "安装完毕! 请注意 nginx, redis, Memcached, mysql-server需要做配置"
