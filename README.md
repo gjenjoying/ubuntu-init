@@ -87,7 +87,7 @@ sudo mysqladmin -p -u root version
 mysqladmin -u peter -p version
 
 # redis
-sudo nano /etc/redis/redis.conf  #1. 将 supervised no 改为 supervised systemd  #2. 把 bind 127.0.0.1 ::1 关闭（注释掉，#） 
+sudo nano /etc/redis/redis.conf  #1. 将 supervised no 改为 supervised systemd  #2.确认 bind 127.0.0.1 ::1 没被注释掉！！！非常重要 之前腾讯服务器中毒 可能和此有关 当时把这个注释掉了 导致可以远程访问
 sudo systemctl restart redis
 sudo netstat -lnp | grep redis
 
