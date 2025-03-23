@@ -52,7 +52,9 @@ function install_php {
 function install_composer {
     curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
     chmod +x /usr/local/bin/composer
-    sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/'
+    sudo -H -u www-data sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/'  # ${WWW_USER} 在24.04 LTS中读不到，直接写死 www-data好了；另外，执行时提示权限问题
+    # 可以手动创建 /var/www/.composer 然后手动执行 chown www-data:www-data /var/www/.composer/ -R 先改为www-data用户先，再执行以上命令
+    composer self-update --1  # 降为1版本
 }
 
 function install_certbot {
