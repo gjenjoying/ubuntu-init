@@ -147,11 +147,27 @@ rename-command DEBUG ""
 
 需要先安装 tccli: sudo pip install tccli，tccli --version， tccli configure，见：https://cloud.tencent.com/document/product/440/34011 
 
-安装方法，得使用 源码安装了 因为ubuntu 24.04 LTS中 pip 安装失败
+sudo apt install python3-pip 
+sudo pip3 install tccli
+
+安装方法，如果失败，可以使用源码安装了 
+
 
 API调试使用 API Explorer: https://console.cloud.tencent.com/api/explorer?Product=lighthouse&Version=2020-03-24&Action=DescribeSnapshots&SignVersion=
 - remove_tencent_services
 - cronjobs里面的 updateImage-cn.sh，updateSnap-cn.sh,updateImage-us.sh，updateSnap-us.sh
+
+常用命令：
+
+查询镜像（自定义的镜像）：tccli lighthouse DescribeBlueprints --cli-unfold-argument --region ap-shanghai --Filters.0.Name blueprint-type --Filters.0.Values PRIVATE
+创建镜像：tccli lighthouse CreateBlueprint --cli-unfold-argument --region ap-shanghai --BlueprintName {20220412} --InstanceId lhins-0p4h990m
+删除镜像：tccli lighthouse DeleteBlueprints --cli-unfold-argument --region ap-shanghai --BlueprintIds {lhbp-lf7supgm}
+(新建镜像会 关机  所以 时间安排上要谨慎)
+
+查询快照：tccli lighthouse DescribeSnapshots --cli-unfold-argument --region ap-shanghai
+创建快照：tccli lighthouse CreateInstanceSnapshot --cli-unfold-argument --region ap-shanghai --InstanceId lhins-0p4h990m
+删除快照：tccli lighthouse DeleteSnapshots --cli-unfold-argument --region ap-shanghai --SnapshotIds {lhsnap-9mel1j7k}
+
 
 ## 其他
 - check_time_zone.sh，仅用于ubuntu系统，不支持mac （可用mac上的multipass下的ubuntu），用于计算各时区时间
