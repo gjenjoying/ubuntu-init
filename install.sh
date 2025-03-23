@@ -18,7 +18,10 @@ function init_system {
 function init_repositories {
     add-apt-repository universe -y 
     # add-apt-repository ppa:certbot/certbot -y # 2025.03.23 发现已经不支持这样安装了
-    add-apt-repository ppa:ondrej/php -y # 同时安装php7.4 需要
+    add-apt-repository ppa:ondrej/php -y # 同时安装php7.4 需要 如果失败，可以手动安装：
+    # 1. 手动添加 PPA： sudo sh -c 'echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" > /etc/apt/sources.list.d/ondrej-php.list'
+    # 2. 添加 GPG 密钥：sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+    
     apt update
 }
 
