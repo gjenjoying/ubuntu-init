@@ -45,8 +45,8 @@ function install_php {
     # php 7.2, 7.3, 7.4 都装吧！老的代码都用得到！sudo update-alternatives --config php 来切换版本  
     # # 验证方法 sudo systemctl status php7.2-fpm， 7.2也得装 发现没装7.2，直接用7.4的话，en.k-reach.com, en.xixisys.com报502错误！
     # 7.3 需要的话 也可装！reachkeeper需要7.3
-    apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
-    apt install -y php7.3 php7.3-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
+    # apt install -y php7.2 php7.2-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
+    # apt install -y php7.3 php7.3-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,sqlite3,exif,imagick,recode,tidy,wddx,xmlrpc,mongodb,recode,wddx}
     apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,memcache,ssh2,sqlite3,imagick,tidy,xmlrpc,mongodb,intl,soap}
 }
 
