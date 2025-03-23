@@ -143,7 +143,12 @@ rename-command DEBUG ""
 复制 SSH 公钥至你的代码库用于代码部署
 
 ## 腾讯服务器相关脚本
+这个是为了让服务器自动执行cronjob 备份 快照等
+
 需要先安装 tccli: sudo pip install tccli，tccli --version， tccli configure，见：https://cloud.tencent.com/document/product/440/34011 
+
+安装方法，得使用 源码安装了 因为ubuntu 24.04 LTS中 pip 安装失败
+
 API调试使用 API Explorer: https://console.cloud.tencent.com/api/explorer?Product=lighthouse&Version=2020-03-24&Action=DescribeSnapshots&SignVersion=
 - remove_tencent_services
 - cronjobs里面的 updateImage-cn.sh，updateSnap-cn.sh,updateImage-us.sh，updateSnap-us.sh
