@@ -5,7 +5,7 @@ set -e
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 LOG_PATH="${CURRENT_DIR}/ubuntu-init.log"
 
-source ${CURRENT_DIR}/common.sh
+source ${CURRENT_DIR}/common.sh  # 注意！！这里导入了 common.sh 所以手动执行以下命令时 要把 ${} 变量直接手动写进去！
 
 check_root
 
