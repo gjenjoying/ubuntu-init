@@ -17,7 +17,7 @@ function init_system {
 
 function init_repositories {
     add-apt-repository universe -y 
-    add-apt-repository ppa:certbot/certbot -y
+    # add-apt-repository ppa:certbot/certbot -y # 2025.03.23 发现已经不支持这样安装了
     add-apt-repository ppa:ondrej/php -y # 同时安装php7.4 需要
     apt update
 }
@@ -56,8 +56,13 @@ function install_composer {
     sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/'
 }
 
+function install_certbot {
+    sudo snap install --classic certbot
+    sudo ln -s /snap/bin/certbot /usr/bin/certbot  # 创建符号链接
+}
+
 function install_others {
-    apt install -y nginx python-certbot-nginx redis-server memcached libmemcached-tools sqlite3 mysql-server
+    apt install -y nginx redis-server memcached libmemcached-tools sqlite3 mysql-server
     chown -R ${WWW_USER}.${WWW_USER_GROUP} /var/www/
     systemctl enable nginx.service
 }
@@ -80,6 +85,7 @@ call_function init_system "正在初始化系统" ${LOG_PATH}
 call_function init_repositories "正在初始化系统软件库" ${LOG_PATH}
 call_function install_basic_softwares "正在安装基本的软件" ${LOG_PATH}
 call_function install_php "正在安装 PHP" ${LOG_PATH}
+call_function install_certbot "正在安装 Certbot" ${LOG_PATH}
 call_function install_others "正在安装 Nginx Redis Memcached Sqlite3 mysql-server" ${LOG_PATH}
 call_function install_composer "正在安装 Composer" ${LOG_PATH}
 call_function init_deployer_user "正在初始化 deployer 用户" ${LOG_PATH}
