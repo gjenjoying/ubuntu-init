@@ -69,7 +69,16 @@ systemctl restart nginx
 # mysql https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
 sudo mysql_secure_installation  # root 需要设置密码（如自己用的最高级密码），其它全部选择 y 即可，注意root不要开romtely访问。不用改为pw 验证方式，创建一个新用户来执行高级权限 如下
 sudo mysql
-GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION; # 改密码
+
+# GRANT ALL ON *.* TO 'peter'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION; # 改密码  在mysql 8.0之后的版本 不能这样执行了，要按照下面的做：
+CREATE USER 'peter'@'localhost' IDENTIFIED BY 'password';# 改密码
+GRANT ALL PRIVILEGES ON *.* TO 'peter'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+
+
+
+
 FLUSH PRIVILEGES;
 exit;
 
