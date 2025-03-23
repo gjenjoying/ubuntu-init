@@ -90,6 +90,23 @@ mysqladmin -u peter -p version
 sudo nano /etc/redis/redis.conf  #1. 将 supervised no 改为 supervised systemd  #2.确认 bind 127.0.0.1 ::1 没被注释掉！！！非常重要 之前腾讯服务器中毒 可能和此有关 当时把这个注释掉了 导致可以远程访问
 sudo systemctl restart redis
 sudo netstat -lnp | grep redis
+在配置文件的 SECURITY部分，sudo nano /etc/redis/redis.conf 增加：
+rename-command FLUSHDB ""
+rename-command FLUSHALL ""
+rename-command KEYS ""
+rename-command PEXPIRE ""
+rename-command DEL ""
+rename-command CONFIG ""
+rename-command SHUTDOWN ""
+rename-command BGREWRITEAOF ""
+rename-command BGSAVE ""
+rename-command SAVE ""
+rename-command SPOP ""
+rename-command SREM ""
+rename-command RENAME ""
+rename-command DEBUG ""
+
+此外，考虑 增加密码： # requirepass foobared  把 foobared 改成很复杂的密码！
 
 # memcached
 # 默认配置基本不用动了，只要确认 /etc/memcached.conf 存在 -l 127.0.0.1
