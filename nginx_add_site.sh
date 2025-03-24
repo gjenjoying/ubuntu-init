@@ -41,7 +41,7 @@ case "$response" in
         ;;
 esac
 
-read -r -p "请输入项目类型【dzq/laravel】 - dzq/laravel用php7.2 （如果需要7.3 可手动在具体nginx conf中改） (注：wp用php7.4，另外脚本) " project_type
+read -r -p "请输入项目类型【dzq/laravel】 - dzq用php7.2?需要再看下templates里的 laravel使用7.4 （如果需要7.3 可手动在具体nginx conf中改） (注：wp用php7.4，另外脚本) " project_type
 
 cat ${CURRENT_DIR}/templates/${project_type}-nginx_site_conf.tpl |
     sed "s|{{domains}}|${domains}|g" |
