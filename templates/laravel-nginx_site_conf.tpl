@@ -1,4 +1,4 @@
-# https://laravel.com/docs/5.7/deployment 参考。注意是php7.2-fpm。
+# https://laravel.com/docs/5.7/deployment 参考。注意是php7.4-fpm。
 server {
     listen 80;
     server_name {{domains}};
@@ -25,7 +25,7 @@ server {
     error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
