@@ -52,7 +52,7 @@ ln -sf /etc/nginx/sites-available/${project}.conf /etc/nginx/sites-enabled/${pro
 
 echo "配置文件创建成功"
 
-mkdir -p ${project_dir} && chown -R ${DEPLOYER_USER}.${WWW_USER_GROUP} ${project_dir}
+mkdir -p ${project_dir} && chown -R ${DEPLOYER_USER}:${WWW_USER_GROUP} ${project_dir}
 
 systemctl restart nginx.service
 
