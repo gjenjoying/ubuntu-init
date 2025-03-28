@@ -1,7 +1,7 @@
 #!/bin/bash
 # 创建一个变量来存储所有输出
 output=""
-output1=""
+subject="Subject: XiXisys-CN Snapshot - "
 
 # 把.env 导入到环境变量中
 export $(xargs <.env)
@@ -21,8 +21,10 @@ leftSnapshotState=${leftSnapshotState//\"/}
 
 if [ "$leftSnapshotState" == "NORMAL" ];then
     output+="保留的Snapshot 状态正常！\n\n"
+    subject+="Good"
 else
     output+="！！！出错！！！保留的Snapshot有问题！请到腾讯后台查看！\n\n"
+    subject+="Bad!!!"
 fi
 
 output+="执行脚本的服务器时间如下：\n"
@@ -53,9 +55,11 @@ echo -e "$output"
 # 如果脚本执行成功，发送邮件
 if [ $? -eq 0 ]; then
     {
-    echo "Subject: XiXisys-CN Snapshot Update"
-    echo "From: peter@reachlinked.com"
+    echo "From: \"XiXisys System\" <peter@reachlinked.com>"
     echo "To: revival.wgj@gmail.com"
+    echo -e "$subject"
+    echo "Content-Type: text/plain; charset=UTF-8"
+    echo "MIME-Version: 1.0"
     echo
     echo -e "$output"
     } | msmtp -a zoho revival.wgj@gmail.com
