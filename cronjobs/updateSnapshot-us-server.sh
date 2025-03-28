@@ -54,11 +54,11 @@ echo -e "$output"
 if [ $? -eq 0 ]; then
     {
     echo "From: \"XiXisys System\" <peter@reachlinked.com>"
-    echo "To: revival.wgj@gmail.com"
+    echo "To: 18957120345@163.com"
     echo -e "$subject"
     echo "Content-Type: text/plain; charset=UTF-8"
     echo "MIME-Version: 1.0"
     echo
     echo -e "$output"
-    } | msmtp -a zoho revival.wgj@gmail.com
+    } | msmtp -a zoho 18957120345@163.com
 fi
