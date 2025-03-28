@@ -1,6 +1,7 @@
 #!/bin/bash
 # 创建一个变量来存储所有输出
 output=""
+output1=""
 
 # 把.env 导入到环境变量中
 export $(xargs <.env)
@@ -52,7 +53,7 @@ echo -e "$output"
 # 如果脚本执行成功，发送邮件
 if [ $? -eq 0 ]; then
     {
-    echo "Subject: XiXisys-CN Snapshot Update Success"
+    echo "Subject: XiXisys-CN Snapshot Update"
     echo "From: peter@reachlinked.com"
     echo "To: revival.wgj@gmail.com"
     echo
