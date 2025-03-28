@@ -13,8 +13,17 @@ expiredApiCustomersCount=$(mysql -u ${dbAdminUser} -p${dbAdminPassword} -se "
     ")
 # expiredApiCustomersCount 结果为 0，代表没找到记录（即所有都没过期）；非0时，代表有过期的 需要处理！暂时没做把过期的人显示出来之类的事情，毕竟量很小！直接人工处理即可！
 if [ "$expiredApiCustomersCount" == "0" ];then
-		echo "无须处理！"
-	else
-		echo "有接入SDS的 API 客户过期了，请查看DB: xixi.api_customers 或 AWS China API gateway"
-		echo "有接入SDS的 API 客户过期了，请查看DB: xixi.api_customers 或 AWS China API gateway。如果要停发邮件提醒，可暂时先把is_active 改成2（代表没续费，但不需要邮件提醒）！" | s-nail -s 'SDS API 付费接入客户过期 请尽快联系续费' revival.wgj@gmail.com,tiffany@xixisys.com,hxd@xixisys.com
+    echo "无须处理！"
+else
+    echo "有接入SDS的 API 客户过期了，请查看DB: xixi.api_customers 或 AWS China API gateway"
+    # 使用 msmtp 发送邮件到多个收件人
+    {
+        echo "From: \"XiXisys System\" <peter@reachlinked.com>"
+	echo "Subject: SDS API 付费接入客户过期 请尽快联系续费"
+        echo "To: revival.wgj@gmail.com, tiffany@xixisys.com, hxd@xixisys.com"
+	echo "Content-Type: text/plain; charset=UTF-8"
+    	echo "MIME-Version: 1.0"
+        echo
+        echo "有接入SDS的 API 客户过期了，请查看DB: xixi.api_customers 或 AWS China API gateway。如果要停发邮件提醒，可暂时先把is_active 改成2（代表没续费，但不需要邮件提醒）！"
+    } | msmtp -a zoho revival.wgj@gmail.com tiffany@xixisys.com hxd@xixisys.com
 fi
