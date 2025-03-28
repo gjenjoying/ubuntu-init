@@ -3,3 +3,4 @@
 vendor
 cronjobs/*.json
 temp.sh
+snapshots.json
