@@ -6,72 +6,66 @@ DEPLOYER_USER=deployer
 WWW_USER=www-data
 WWW_USER_GROUP=www-data
 
-echo "==== 开始初始化 Ubuntu 24.04 ===="
+echo "==== Ubuntu 24.04 + PHP 7.4 (B方案修复版) ===="
 
 export DEBIAN_FRONTEND=noninteractive
 
 # ================================
-
 # 基础环境
-
 # ================================
 
 echo "==> 更新系统"
-apt update
+apt update -y
 
 echo "==> 安装基础组件"
-apt install -y software-properties-common ca-certificates lsb-release apt-transport-https gnupg curl
+apt install -y software-properties-common ca-certificates lsb-release \
+apt-transport-https gnupg curl unzip git build-essential jq supervisor
 
 # ================================
-
-# 手动添加 ondrej/php 源（避免卡住）
-
+# PHP PPA（修复 404 + 改用 keyserver）
 # ================================
 
-echo "==> 添加 PHP PPA（手动方式）"
+echo "==> 添加 Ondrej PHP PPA（兼容方案）"
 
 mkdir -p /etc/apt/keyrings
 
-curl -fsSL https://ppa.launchpadcontent.net/ondrej/php/ubuntu/KEY.gpg 
+# 修复点：不用 launchpadcontent KEY.gpg（已404）
+curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE5267A6C" \
 | gpg --dearmor -o /etc/apt/keyrings/ondrej-php.gpg
 
-echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpadcontent.net/ondrej/php/ubuntu noble main" 
+# ⚠️关键：用 jammy 源（不是 noble）
+echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" \
 > /etc/apt/sources.list.d/ondrej-php.list
 
-apt update
+apt update -y
 
 # ================================
-
-# 基础软件
-
-# ================================
-
-echo "==> 安装基础软件"
-apt install -y curl git build-essential unzip supervisor jq
-
-# ================================
-
 # PHP 7.4
-
 # ================================
 
 echo "==> 安装 PHP 7.4"
-apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,readline,xml,zip,redis,memcached,memcache,ssh2,sqlite3,imagick,tidy,xmlrpc,mongodb,intl,soap}
+
+apt install -y \
+php7.4 php7.4-fpm php7.4-cli php7.4-common \
+php7.4-bcmath php7.4-curl php7.4-gd php7.4-mbstring \
+php7.4-mysql php7.4-opcache php7.4-xml php7.4-zip \
+php7.4-readline php7.4-sqlite3 php7.4-intl \
+php7.4-soap php7.4-redis php7.4-memcached \
+php7.4-imagick php7.4-mongodb || true
 
 # ================================
-
-# MySQL（恢复交互）
-
+# MySQL（避免交互卡死）
 # ================================
 
-echo "==> 安装 MySQL（交互）"
-unset DEBIAN_FRONTEND
+echo "==> 安装 MySQL（非交互模式）"
+
+debconf-set-selections <<< "mysql-server mysql-server/root_password password root"
+debconf-set-selections <<< "mysql-server mysql-server/root_password_again password root"
+
 apt install -y mysql-server
 
 # ================================
-
-# 其他服务
-
+# Nginx / Redis / Memcached
 # ================================
 
 echo "==> 安装 Nginx / Redis / Memcached"
@@ -80,70 +74,66 @@ apt install -y nginx redis-server memcached libmemcached-tools sqlite3
 systemctl enable nginx
 
 # ================================
-
-# Composer v1
-
+# Composer v1（保持旧项目兼容）
 # ================================
 
 echo "==> 安装 Composer v1"
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
+curl -sS https://getcomposer.org/installer | php -- \
+--install-dir=/usr/local/bin/ --filename=composer
+
 chmod +x /usr/local/bin/composer
+
 composer self-update --1
 
 mkdir -p /var/www/.composer
 chown -R www-data:www-data /var/www/.composer
 
-sudo -H -u www-data composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/
+sudo -H -u www-data composer config -g \
+repo.packagist composer https://mirrors.cloud.tencent.com/composer/
 
 # ================================
-
 # Certbot
-
 # ================================
 
 echo "==> 安装 Certbot"
 apt install -y certbot python3-certbot-nginx
 
 # ================================
-
 # deployer 用户
-
 # ================================
 
 echo "==> 创建 deployer 用户"
 
 if id "$DEPLOYER_USER" &>/dev/null; then
-echo "用户已存在，跳过"
+  echo "用户已存在，跳过"
 else
-useradd -d /home/${DEPLOYER_USER} -m -s /bin/bash ${DEPLOYER_USER}
+  useradd -d /home/${DEPLOYER_USER} -m -s /bin/bash ${DEPLOYER_USER}
 fi
 
 usermod -aG ${WWW_USER_GROUP} ${DEPLOYER_USER}
 
-echo "${DEPLOYER_USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${DEPLOYER_USER}
+echo "${DEPLOYER_USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${DEPLOYER_USER}
 chmod 440 /etc/sudoers.d/${DEPLOYER_USER}
 
 mkdir -p /home/${DEPLOYER_USER}/.ssh
 chown -R ${DEPLOYER_USER}:${DEPLOYER_USER} /home/${DEPLOYER_USER}/.ssh
 
-sudo -H -u ${DEPLOYER_USER} ssh-keygen -t rsa -b 4096 -N "" -f /home/${DEPLOYER_USER}/.ssh/id_rsa || true
+sudo -H -u ${DEPLOYER_USER} ssh-keygen -t rsa -b 4096 -N "" \
+-f /home/${DEPLOYER_USER}/.ssh/id_rsa || true
 
 # ================================
-
-# 权限
-
+# /var/www 权限
 # ================================
 
 echo "==> 设置 /var/www 权限"
-chown -R ${DEPLOYER_USER}.${WWW_USER_GROUP} /var/www/
+chown -R ${DEPLOYER_USER}:${WWW_USER_GROUP} /var/www/
 
 # ================================
-
 # PHP 配置
-
 # ================================
 
-echo "==> 应用 PHP 配置"
+echo "==> PHP 配置"
 
 mkdir -p /etc/php/7.4/fpm/conf.d
 
@@ -156,13 +146,11 @@ EOF
 systemctl restart php7.4-fpm
 
 # ================================
-
-# Wormhole
-
+# wormhole
 # ================================
 
 echo "==> 安装 wormhole"
 apt install -y magic-wormhole
 
-echo "==== 安装完成 ✅ ===="
-echo "请手动配置：nginx / mysql / php"
+echo "==== 完成 ✅ ===="
+echo "注意：这是 PHP7.4 legacy 环境（Ubuntu 24.04 非官方支持）"
