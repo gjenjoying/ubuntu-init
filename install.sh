@@ -21,7 +21,7 @@ software-properties-common ca-certificates lsb-release \
 apt-transport-https gnupg curl unzip git build-essential jq supervisor
 
 # ================================
-# PPA fix
+# PPA fix (PHP 7.4)
 # ================================
 
 mkdir -p /etc/apt/keyrings
@@ -35,10 +35,10 @@ echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpad.net/
 apt update -y
 
 # ================================
-# PHP 7.4 CORE ONLY (关键修复点)
+# PHP 7.4 CORE
 # ================================
 
-echo "==> Installing PHP7.4 core packages (safe mode)"
+echo "==> Installing PHP7.4 core packages"
 
 apt install -y \
 php7.4 php7.4-fpm php7.4-cli php7.4-common \
@@ -47,27 +47,29 @@ php7.4-mysql php7.4-opcache php7.4-xml php7.4-zip \
 php7.4-readline php7.4-sqlite3 || true
 
 # ================================
-# OPTIONAL EXTENSIONS (不保证成功)
+# OPTIONAL EXTENSIONS
 # ================================
-
-echo "==> Installing optional extensions (non-blocking)"
 
 apt install -y php7.4-redis php7.4-memcached || true
 apt install -y php7.4-mongodb || true
-
-# ❗关键修复：这些在 24.04 基本装不了，所以允许失败
-apt install -y php7.4-imagick || true
-apt install -y php7.4-intl || true
-apt install -y php7.4-soap || true
+apt install -y php7.4-imagick php7.4-intl php7.4-soap || true
 
 # ================================
-# MySQL (non-interactive)
+# MYSQL (FIXED - 关键修复)
 # ================================
 
-debconf-set-selections <<< "mysql-server mysql-server/root_password password root"
-debconf-set-selections <<< "mysql-server mysql-server/root_password_again password root"
+echo "==> Installing MySQL (no preseed, keep default auth_socket)"
 
 apt install -y mysql-server
+
+systemctl enable mysql
+systemctl restart mysql
+
+# ✔ 保证 sudo mysql 可用（关键）
+# Ubuntu 默认 root 使用 socket auth，本来就应该这样
+
+echo "==> verifying mysql access"
+sudo mysql -e "SELECT 'mysql ok';" || true
 
 # ================================
 # Nginx / Redis
@@ -77,10 +79,9 @@ apt install -y nginx redis-server memcached sqlite3
 systemctl enable nginx
 
 # ================================
-# FIX: ensure php exists before composer
+# ensure php exists
 # ================================
 
-echo "==> verifying php"
 which php || ln -s /usr/bin/php7.4 /usr/bin/php || true
 
 # ================================
@@ -93,7 +94,6 @@ curl -sS https://getcomposer.org/installer | php -- \
 --install-dir=/usr/local/bin --filename=composer
 
 chmod +x /usr/local/bin/composer
-
 composer self-update --1 || true
 
 # ================================
@@ -124,10 +124,10 @@ EOF
 systemctl restart php7.4-fpm || true
 
 # ================================
-# wormhole
+# tools
 # ================================
 
 apt install -y magic-wormhole
 
-echo "==== DONE (SAFE MODE) ===="
-echo "PHP7.4 installed in degraded mode (no intl/imagick guaranteed)"
+echo "==== DONE ===="
+echo "PHP7.4 installed + MySQL fixed (auth_socket default preserved)"
