@@ -1,19 +1,32 @@
 #!/bin/bash
-
 set -e
 
 DEPLOYER_USER=deployer
-WWW_USER=www-data
 WWW_USER_GROUP=www-data
 
-echo "==== Ubuntu 24.04 + PHP7.4 SAFE B MODE ===="
+echo "==== Ubuntu 24.04 SAFE INSTALL FIXED ===="
 
 export DEBIAN_FRONTEND=noninteractive
 
 # ================================
+# FIX 1: force IPv4 (CRITICAL)
+# ================================
+echo "==> forcing IPv4 for apt/network"
+echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4
+
+# ================================
+# FIX 2: wait apt lock (NO rm lock)
+# ================================
+echo "==> waiting for apt lock..."
+
+while fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
+  echo "apt locked, waiting..."
+  sleep 2
+done
+
+# ================================
 # base
 # ================================
-
 apt update -y
 
 apt install -y \
@@ -22,147 +35,94 @@ apt-transport-https gnupg curl unzip git build-essential jq supervisor \
 openssh-client
 
 # ================================
-# PPA fix (PHP 7.4)
+# PPA (ondrej php) - SAFE MODE
 # ================================
-
 mkdir -p /etc/apt/keyrings
 
-curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE5267A6C" \
+curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE5267A6C \
 | gpg --dearmor -o /etc/apt/keyrings/ondrej-php.gpg
 
 echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" \
 > /etc/apt/sources.list.d/ondrej-php.list
 
-apt update -y
+apt update -y || echo "WARN: PPA update failed, continuing..."
 
 # ================================
-# PHP 7.4 CORE
+# PHP 7.4 (SAFE TRY-CATCH STYLE)
 # ================================
 
-echo "==> Installing PHP7.4 core packages"
+echo "==> installing PHP7.4 (may fallback fail-safe)"
 
 apt install -y \
-php7.4 php7.4-fpm php7.4-cli php7.4-common \
-php7.4-bcmath php7.4-curl php7.4-gd php7.4-mbstring \
-php7.4-mysql php7.4-opcache php7.4-xml php7.4-zip \
-php7.4-readline php7.4-sqlite3 || true
+php7.4 php7.4-cli php7.4-fpm php7.4-common \
+php7.4-curl php7.4-mbstring php7.4-xml php7.4-zip \
+php7.4-mysql php7.4-opcache php7.4-sqlite3 \
+php7.4-gd php7.4-bcmath || echo "WARN: PHP7.4 partially failed"
 
 # ================================
-# OPTIONAL EXTENSIONS
+# fix php symlink
 # ================================
+if [ -f /usr/bin/php7.4 ]; then
+  ln -sf /usr/bin/php7.4 /usr/bin/php
+fi
 
-apt install -y php7.4-redis php7.4-memcached || true
-apt install -y php7.4-mongodb || true
-apt install -y php7.4-imagick php7.4-intl php7.4-soap || true
+php -v || echo "WARN: PHP not available"
 
 # ================================
-# MYSQL (FIXED)
+# MySQL
 # ================================
-
-echo "==> Installing MySQL (auth_socket default preserved)"
-
 apt install -y mysql-server
 
 systemctl enable mysql
 systemctl restart mysql
 
-echo "==> verifying mysql access"
 sudo mysql -e "SELECT 'mysql ok';" || true
 
 # ================================
-# Nginx / Redis
+# nginx / redis
 # ================================
-
 apt install -y nginx redis-server memcached sqlite3
 systemctl enable nginx
 
 # ================================
-# ensure php exists
+# composer (ONLY IF PHP EXISTS)
 # ================================
+if command -v php >/dev/null 2>&1; then
+  echo "==> installing composer"
+  curl -sS https://getcomposer.org/installer | php -- \
+  --install-dir=/usr/local/bin --filename=composer
 
-which php || ln -s /usr/bin/php7.4 /usr/bin/php || true
-
-# ================================
-# Composer v1
-# ================================
-
-echo "==> installing composer"
-
-curl -sS https://getcomposer.org/installer | php -- \
---install-dir=/usr/local/bin --filename=composer
-
-chmod +x /usr/local/bin/composer
-composer self-update --1 || true
-
-# =========================================================
-# deploy user (MERGED OLD + NEW LOGIC, SAFE VERSION)
-# =========================================================
-
-echo "==> setting up deploy user"
-
-if ! id "$DEPLOYER_USER" &>/dev/null; then
-  useradd -d /home/${DEPLOYER_USER} -m -s /bin/bash ${DEPLOYER_USER}
+  chmod +x /usr/local/bin/composer
+  composer self-update --1 || true
+else
+  echo "WARN: skip composer (php missing)"
 fi
 
-# add to www group
-usermod -aG ${WWW_USER_GROUP} ${DEPLOYER_USER}
+# ================================
+# deploy user (safe idempotent)
+# ================================
+if ! id "$DEPLOYER_USER" >/dev/null 2>&1; then
+  useradd -d /home/$DEPLOYER_USER -m -s /bin/bash $DEPLOYER_USER
+fi
 
-# ------------------------
-# bash environment (old logic preserved)
-# ------------------------
+usermod -aG $WWW_USER_GROUP $DEPLOYER_USER
 
-sudo -H -u ${DEPLOYER_USER} bash -c 'echo "umask 022" >> ~/.bashrc'
+echo "$DEPLOYER_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$DEPLOYER_USER
+chmod 440 /etc/sudoers.d/$DEPLOYER_USER
 
-# ------------------------
-# sudoers (FIXED: avoid overwriting /etc/sudoers)
-# ------------------------
-
-echo "${DEPLOYER_USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${DEPLOYER_USER}
-chmod 440 /etc/sudoers.d/${DEPLOYER_USER}
-
-# ------------------------
-# web directory permissions (old logic improved safety)
-# ------------------------
-
-mkdir -p /var/www/html
-
-chown -R ${DEPLOYER_USER}:${WWW_USER_GROUP} /var/www/html
-chmod -R 775 /var/www/html
-chmod g+s /var/www/html
-
-# ------------------------
-# SSH key (safe: only generate if missing)
-# ------------------------
-
-sudo -H -u ${DEPLOYER_USER} bash -c '
+# ================================
+# SSH key safe
+# ================================
+sudo -H -u $DEPLOYER_USER bash -c '
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
+
 if [ ! -f ~/.ssh/id_rsa ]; then
   ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
 fi
-chmod 600 ~/.ssh/id_rsa
-chmod 644 ~/.ssh/id_rsa.pub
 '
 
-# =========================================================
-# PHP config
-# =========================================================
-
-mkdir -p /etc/php/7.4/fpm/conf.d
-
-cat > /etc/php/7.4/fpm/conf.d/99-custom.ini <<EOF
-upload_max_filesize = 100M
-post_max_size = 100M
-memory_limit = 512M
-EOF
-
-systemctl restart php7.4-fpm || true
-
 # ================================
-# tools
+# DONE
 # ================================
-
-apt install -y magic-wormhole
-
-echo "==== DONE ===="
-echo "PHP7.4 + MySQL + deploy user ready"
+echo "==== DONE SAFE INSTALL ===="
