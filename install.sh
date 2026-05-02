@@ -18,7 +18,8 @@ apt update -y
 
 apt install -y \
 software-properties-common ca-certificates lsb-release \
-apt-transport-https gnupg curl unzip git build-essential jq supervisor
+apt-transport-https gnupg curl unzip git build-essential jq supervisor \
+openssh-client
 
 # ================================
 # PPA fix (PHP 7.4)
@@ -55,18 +56,15 @@ apt install -y php7.4-mongodb || true
 apt install -y php7.4-imagick php7.4-intl php7.4-soap || true
 
 # ================================
-# MYSQL (FIXED - 关键修复)
+# MYSQL (FIXED)
 # ================================
 
-echo "==> Installing MySQL (no preseed, keep default auth_socket)"
+echo "==> Installing MySQL (auth_socket default preserved)"
 
 apt install -y mysql-server
 
 systemctl enable mysql
 systemctl restart mysql
-
-# ✔ 保证 sudo mysql 可用（关键）
-# Ubuntu 默认 root 使用 socket auth，本来就应该这样
 
 echo "==> verifying mysql access"
 sudo mysql -e "SELECT 'mysql ok';" || true
@@ -96,22 +94,59 @@ curl -sS https://getcomposer.org/installer | php -- \
 chmod +x /usr/local/bin/composer
 composer self-update --1 || true
 
-# ================================
-# deploy user
-# ================================
+# =========================================================
+# deploy user (MERGED OLD + NEW LOGIC, SAFE VERSION)
+# =========================================================
+
+echo "==> setting up deploy user"
 
 if ! id "$DEPLOYER_USER" &>/dev/null; then
-  useradd -d /home/$DEPLOYER_USER -m -s /bin/bash $DEPLOYER_USER
+  useradd -d /home/${DEPLOYER_USER} -m -s /bin/bash ${DEPLOYER_USER}
 fi
 
-usermod -aG www-data $DEPLOYER_USER
+# add to www group
+usermod -aG ${WWW_USER_GROUP} ${DEPLOYER_USER}
 
-echo "$DEPLOYER_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$DEPLOYER_USER
-chmod 440 /etc/sudoers.d/$DEPLOYER_USER
+# ------------------------
+# bash environment (old logic preserved)
+# ------------------------
 
-# ================================
+sudo -H -u ${DEPLOYER_USER} bash -c 'echo "umask 022" >> ~/.bashrc'
+
+# ------------------------
+# sudoers (FIXED: avoid overwriting /etc/sudoers)
+# ------------------------
+
+echo "${DEPLOYER_USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${DEPLOYER_USER}
+chmod 440 /etc/sudoers.d/${DEPLOYER_USER}
+
+# ------------------------
+# web directory permissions (old logic improved safety)
+# ------------------------
+
+mkdir -p /var/www/html
+
+chown -R ${DEPLOYER_USER}:${WWW_USER_GROUP} /var/www/html
+chmod -R 775 /var/www/html
+chmod g+s /var/www/html
+
+# ------------------------
+# SSH key (safe: only generate if missing)
+# ------------------------
+
+sudo -H -u ${DEPLOYER_USER} bash -c '
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+if [ ! -f ~/.ssh/id_rsa ]; then
+  ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
+fi
+chmod 600 ~/.ssh/id_rsa
+chmod 644 ~/.ssh/id_rsa.pub
+'
+
+# =========================================================
 # PHP config
-# ================================
+# =========================================================
 
 mkdir -p /etc/php/7.4/fpm/conf.d
 
@@ -130,4 +165,4 @@ systemctl restart php7.4-fpm || true
 apt install -y magic-wormhole
 
 echo "==== DONE ===="
-echo "PHP7.4 installed + MySQL fixed (auth_socket default preserved)"
+echo "PHP7.4 + MySQL + deploy user ready"
