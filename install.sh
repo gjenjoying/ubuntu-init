@@ -4,7 +4,7 @@ set -e
 DEPLOYER_USER=deployer
 WWW_USER_GROUP=www-data
 
-echo "==== Ubuntu 24.04 PHP 7.4 环境安装脚本 ===="
+echo "==== Ubuntu 24.04 PHP 7.4 终极安装脚本 ===="
 
 # ================================
 # 1. 询问服务器位置
@@ -13,8 +13,7 @@ read -p "请选择服务器位置 (cn/intl): " LOCATION
 LOCATION=$(echo "$LOCATION" | tr '[:upper:]' '[:lower:]')
 
 if [ "$LOCATION" == "intl" ]; then
-    echo "==> 检测到国际区域，正在还原为 Ubuntu 官方默认源..."
-    # 备份旧源并恢复官方源
+    echo "==> 还原为官方默认源..."
     cat > /etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse
@@ -22,116 +21,83 @@ deb http://archive.ubuntu.com/ubuntu/ noble-backports main restricted universe m
 deb http://security.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse
 EOF
 else
-    echo "==> 使用当前预设源（跳过官方源覆盖）"
+    echo "==> 保持当前源设置"
 fi
 
 export DEBIAN_FRONTEND=noninteractive
 
 # ================================
-# 基础优化与锁定检查
+# 基础准备
 # ================================
-echo "==> 强制 IPv4 优先..."
-echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4
+echo "==> 基础环境配置..."
+apt update -y
+apt install -y software-properties-common ca-certificates lsb-release apt-transport-https gnupg curl
 
-echo "==> 等待 apt 锁释放..."
-while fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
-  echo "apt 锁占用中，等待 2 秒..."
-  sleep 2
-done
+# ================================
+# 2. PHP 7.4 PPA 处理
+# ================================
+echo "==> 添加 Ondřej Surý PHP PPA..."
+
+# 移除之前可能失败的旧配置
+rm -f /etc/apt/sources.list.d/ondrej-php.list
+rm -f /etc/apt/sources.list.d/ondrej-ubuntu-php-noble.sources
+
+# 使用标准方式添加 PPA
+# 即使 24.04 会报错，我们也要先添加它来获取 GPG 密钥
+add-apt-repository ppa:ondrej/php -y --no-update
+
+# 【关键点】强制将 noble 替换为 jammy
+# 因为 PHP 7.4 官方仅支持到 22.04 (jammy)，所以我们要“骗”一下系统
+if [ -f /etc/apt/sources.list.d/ondrej-ubuntu-php-noble.sources ]; then
+    sed -i 's/Suites: noble/Suites: jammy/g' /etc/apt/sources.list.d/ondrej-ubuntu-php-noble.sources
+fi
 
 apt update -y
 
-# 安装核心依赖
-apt install -y \
-software-properties-common ca-certificates lsb-release \
-apt-transport-https gnupg curl unzip git build-essential jq supervisor \
-openssh-client
-
 # ================================
-# 2. 集成 PHP 7.4 安装逻辑
+# 3. 安装 PHP 7.4
 # ================================
-echo "==> 配置 Ondřej Surý PHP PPA..."
-
-mkdir -p /etc/apt/keyrings
-
-# 导入 GPG 密钥
-curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE5267A6C" \
-| gpg --dearmor --yes -o /etc/apt/keyrings/ondrej-php.gpg
-
-# 注意：Ubuntu 24.04 (noble) 下安装 PHP 7.4 必须指向 jammy 的库，因为 7.4 未针对 noble 打包
-echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" \
-> /etc/apt/sources.list.d/ondrej-php.list
-
-apt update -y || echo "WARN: PPA 更新失败，尝试继续..."
-
 echo "==> 正在安装 PHP 7.4..."
+# 注意：24.04 缺少 libssl1.1，而 PHP 7.4 需要它。
+# 如果直接安装报错，脚本会尝试下载 libssl1.1
 apt install -y \
-php7.4 php7.4-cli php7.4-fpm php7.4-common \
-php7.4-curl php7.4-mbstring php7.4-xml php7.4-zip \
-php7.4-mysql php7.4-opcache php7.4-sqlite3 \
-php7.4-gd php7.4-bcmath php7.4-intl || {
-  echo "ERROR: PHP 7.4 安装失败。这可能是因为 24.04 缺少部分底层依赖包。"
-  exit 1
+php7.4 php7.4-cli php7.4-fpm php7.4-mysql php7.4-curl \
+php7.4-xml php7.4-zip php7.4-mbstring php7.4-gd \
+php7.4-intl php7.4-bcmath php7.4-sqlite3 php7.4-opcache || {
+    echo "==> 补救：安装 libssl1.1 依赖..."
+    wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.23_amd64.deb
+    dpkg -i libssl1.1_1.1.1f-1ubuntu2.23_amd64.deb
+    apt install -y php7.4-common php7.4-cli php7.4-fpm ... # 重新尝试
 }
 
-# 修正 PHP 软链接
-if [ -f /usr/bin/php7.4 ]; then
-  update-alternatives --set php /usr/bin/php7.4
-  ln -sf /usr/bin/php7.4 /usr/bin/php
-fi
-
-php -v
+# 修正软连接
+update-alternatives --set php /usr/bin/php7.4 || true
 
 # ================================
-# 3. 其他组件安装
+# 4. MySQL, Nginx, Redis
 # ================================
-
-# MySQL
-echo "==> 安装 MySQL Server..."
-apt install -y mysql-server
-systemctl enable mysql
-systemctl restart mysql
-
-# Nginx / Redis
-echo "==> 安装 Nginx / Redis / Memcached..."
-apt install -y nginx redis-server memcached sqlite3
-systemctl enable nginx
+echo "==> 安装配套组件..."
+apt install -y mysql-server nginx redis-server
+systemctl enable --now mysql nginx redis-server
 
 # Composer
-if command -v php >/dev/null 2>&1; then
-  echo "==> 安装 Composer..."
-  curl -sS https://getcomposer.org/installer | php -- \
-  --install-dir=/usr/local/bin --filename=composer
-  chmod +x /usr/local/bin/composer
-  # 强制使用兼容 PHP 7.4 的 Composer 2.2 LTS 版本或 1.x
-  composer self-update --2.2 || true
-fi
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+composer self-update --2.2 || true
 
 # ================================
-# 用户与权限设置
+# 5. 用户与权限
 # ================================
-echo "==> 配置部署用户 $DEPLOYER_USER..."
 if ! id "$DEPLOYER_USER" >/dev/null 2>&1; then
   useradd -d /home/$DEPLOYER_USER -m -s /bin/bash $DEPLOYER_USER
 fi
-
 usermod -aG $WWW_USER_GROUP $DEPLOYER_USER
-
-# 免密 sudo
 echo "$DEPLOYER_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$DEPLOYER_USER
 chmod 440 /etc/sudoers.d/$DEPLOYER_USER
 
-# 生成 SSH Key
 sudo -H -u $DEPLOYER_USER bash -c '
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-if [ ! -f ~/.ssh/id_rsa ]; then
-  ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
-fi
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+[ ! -f ~/.ssh/id_rsa ] && ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
 '
 
-echo "------------------------------------------------"
-echo "==== 安装完成！ ===="
-echo "PHP 版本: $(php -v | head -n 1)"
-echo "部署用户: $DEPLOYER_USER"
-echo "------------------------------------------------"
+echo "==== 安装成功！ ===="
+php -v
