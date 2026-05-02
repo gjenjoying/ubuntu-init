@@ -8,6 +8,8 @@ WWW_USER_GROUP=www-data
 
 echo "==== 开始初始化 Ubuntu 24.04 ===="
 
+export DEBIAN_FRONTEND=noninteractive
+
 # ================================
 
 # 基础环境
@@ -18,17 +20,24 @@ echo "==> 更新系统"
 apt update
 
 echo "==> 安装基础组件"
-apt install -y software-properties-common ca-certificates lsb-release apt-transport-https
+apt install -y software-properties-common ca-certificates lsb-release apt-transport-https gnupg curl
 
 # ================================
 
-# 软件源
+# 手动添加 ondrej/php 源（避免卡住）
 
 # ================================
 
-echo "==> 添加软件源"
-add-apt-repository universe -y
-add-apt-repository ppa:ondrej/php -y
+echo "==> 添加 PHP PPA（手动方式）"
+
+mkdir -p /etc/apt/keyrings
+
+curl -fsSL https://ppa.launchpadcontent.net/ondrej/php/ubuntu/KEY.gpg 
+| gpg --dearmor -o /etc/apt/keyrings/ondrej-php.gpg
+
+echo "deb [signed-by=/etc/apt/keyrings/ondrej-php.gpg] http://ppa.launchpadcontent.net/ondrej/php/ubuntu noble main" 
+> /etc/apt/sources.list.d/ondrej-php.list
+
 apt update
 
 # ================================
@@ -51,11 +60,12 @@ apt install -y php7.4 php7.4-{bcmath,cli,curl,fpm,gd,mbstring,mysql,opcache,read
 
 # ================================
 
-# MySQL（交互式）
+# MySQL（恢复交互）
 
 # ================================
 
-echo "==> 安装 MySQL（会有交互）"
+echo "==> 安装 MySQL（交互）"
+unset DEBIAN_FRONTEND
 apt install -y mysql-server
 
 # ================================
@@ -120,7 +130,7 @@ sudo -H -u ${DEPLOYER_USER} ssh-keygen -t rsa -b 4096 -N "" -f /home/${DEPLOYER_
 
 # ================================
 
-# 权限（你原逻辑）
+# 权限
 
 # ================================
 
